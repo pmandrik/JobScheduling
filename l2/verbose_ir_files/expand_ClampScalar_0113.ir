@@ -1,0 +1,35 @@
+# IR entry: @_anonymous__655
+# Total subgraphs: 1
+
+# Total params: 3
+# Params:
+%para1_: <Tensor[Int32], (10)>
+%para2_: <Int64, NoShape>
+%para3_: <Int64, NoShape>
+
+Node counting information:
+Total number of nodes: 9
+Total number of cnodes: 3
+
+subgraph attr:
+subgraph instance: _anonymous__655 : 0x61d0f3130480
+
+subgraph @_anonymous__655() {
+  %0(CNode_652) = PrimFunc_Maximum(%para1_Parameter_653, Tensor(shape=[], dtype=Int32, value=0)) primitive_attrs: {IsFeatureMapOutput: Bool(1), IsFeatureMapInputList: (0)} cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<Tensor[Int32], (10)>, <Tensor[Int32], (), value=...>) -> (<Tensor[Int32], (10)>)
+      : (<Int32xDefaultFormat[const vector]{10}>, <Int32xDefaultFormat[const vector]{}>) -> (<Int32xDefaultFormat[const vector]{10}>)
+      : (Tensor, Tensor) -> (Tensor)
+      # Fullname with scope: (Expand/_ClampScalar/Maximum-op0)
+  %1(CNode_654) = PrimFunc_Minimum(%0, Tensor(shape=[], dtype=Int32, value=1068)) primitive_attrs: {IsFeatureMapOutput: Bool(1), IsFeatureMapInputList: (0)}
+      : (<Tensor[Int32], (10)>, <Tensor[Int32], (), value=...>) -> (<Tensor[Int32], (10)>)
+      : (<Int32xDefaultFormat[const vector]{10}>, <Int32xDefaultFormat[const vector]{}>) -> (<Int32xDefaultFormat[const vector]{10}>)
+      : (Tensor, Tensor) -> (Tensor)
+      # Fullname with scope: (Expand/_ClampScalar/Minimum-op0)
+  Return(%1)
+      : (<Tensor[Int32], (10)>)
+      # Fullname with scope: (Default/Return-op5)
+}
+# Order:
+#   1: @_anonymous__655:CNode_656{[0]: ValueNode<Primitive> Return, [1]: CNode_654}
+
+

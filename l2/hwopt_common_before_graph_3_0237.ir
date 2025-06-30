@@ -1,0 +1,42 @@
+# IR entry: @kernel_graph3
+# Total subgraphs: 1
+
+# Attrs:
+enable_zero_copy_in_graph: 1
+
+# Total params: 3
+# Params:
+%para1_: <Tensor[Int32], (102)>  :  <Int32xDefaultFormat[const vector]{102}>  :  IsWeight: false
+%para2_: <Tensor[Int32], (102)>  :  <Int32xDefaultFormat[const vector]{102}>  :  IsWeight: false
+%para3_: <Tensor[Int32], (10)>  :  <Int32xDefaultFormat[const vector]{10}>  :  IsWeight: false
+
+Node counting information:
+Total number of nodes: 12
+Total number of cnodes: 4
+
+subgraph attr:
+enable_zero_copy_in_graph: 1
+subgraph instance: kernel_graph3 : 0x61d0f7fc8d20
+
+subgraph @kernel_graph3() {
+  %0(CNode_740) = MakeTuple(%para1_Parameter_741, %para2_Parameter_742, %para3_Parameter_743) cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<Tensor[Int32], (102)>, <Tensor[Int32], (102)>, <Tensor[Int32], (10)>) -> (<Tuple[Tensor[Int32]*3], TupleShape((102), (102), (10))>)
+      # Scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:100~139, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:135~137, 6~74/      if cond_func((open_list, top_list, top_dist)):/
+  %1(CNode_744) = Depend(%0, Tensor(shape=[], dtype=Int32, value=2)) primitive_attrs: {side_effect_propagate: I64(1)} cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<Tuple[Tensor[Int32]*3], TupleShape((102), (102), (10))>, <Tensor[Int32], (), value=...>) -> (<Tuple[Tensor[Int32]*3], TupleShape((102), (102), (10))>)
+      # Scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:100~139, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:135~137, 6~74/      if cond_func((open_list, top_list, top_dist)):/
+  %2(CNode_745) = MakeTuple(%1)
+      : (<Tuple[Tensor[Int32]*3], TupleShape((102), (102), (10))>) -> (<Tuple[Tuple[Tensor[Int32]*3]], TupleShape(TupleShape((102), (102), (10)))>)
+      # Scope: (Default)
+  Return(%2)
+      : (<Tuple[Tuple[Tensor[Int32]*3]], TupleShape(TupleShape((102), (102), (10)))>)
+      # Scope: (Default)
+}
+# Order:
+#   1: @kernel_graph3:CNode_746{[0]: ValueNode<Primitive> Return, [1]: CNode_745}
+
+

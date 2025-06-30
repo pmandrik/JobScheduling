@@ -1,0 +1,36 @@
+# IR entry: @_anonymous__724
+# Total subgraphs: 1
+
+# Total params: 4
+# Params:
+%para1_: <Tensor[Int32], (30, 2)>
+%para2_: <Tuple[Int64], TupleShape(NoShape), elements_use_flags={[const vector]{1}}>
+%para3_: <Bool, NoShape>
+%para4_: <None, NoShape>
+
+Node counting information:
+Total number of nodes: 11
+Total number of cnodes: 3
+
+subgraph attr:
+subgraph instance: _anonymous__724 : 0x61d0f3130480
+
+subgraph @_anonymous__724() {
+  %0(CNode_719) = PrimFunc_Cast(%para1_Parameter_720, I64(35)) primitive_attrs: {is_backend_cast: Bool(0), IsFeatureMapOutput: Bool(1), IsFeatureMapInputList: (0)} cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<Tensor[Int32], (30, 2)>, <Int64, NoShape>) -> (<Tensor[Int64], (30, 2)>)
+      : (<Int32xDefaultFormat[const vector]{30, 2}>, <Int64xDefaultFormat[const vector]{}>) -> (<Int64xDefaultFormat[const vector]{30, 2}>)
+      : (Tensor, Tensor) -> (Tensor)
+      # Fullname with scope: (Expand/_SumExt/Cast-op2)
+  %1(CNode_721) = PrimFunc_ReduceSum(%0, %para2_Parameter_722, %para3_Parameter_723, Bool(0)) primitive_attrs: {IsFeatureMapOutput: Bool(1), IsFeatureMapInputList: (0)}
+      : (<Tensor[Int64], (30, 2)>, <Tuple[Int64], TupleShape(NoShape), elements_use_flags={[const vector]{1}}>, <Bool, NoShape>, <Bool, NoShape>) -> (<Tensor[Int64], (30)>)
+      : (<Int64xDefaultFormat[const vector]{30, 2}>, <Int64xDefaultFormat[const vector]{}>, <BoolxDefaultFormat[const vector]{}>, <BoolxDefaultFormat[const vector]{}>) -> (<Int64xDefaultFormat[const vector]{30}>)
+      : (Tensor, Tuple, Scalar, Scalar) -> (Tensor)
+      # Fullname with scope: (Expand/_SumExt/ReduceSum-op1)
+  Return(%1)
+      : (<Tensor[Int64], (30)>)
+      # Fullname with scope: (Default/Return-op9)
+}
+# Order:
+#   1: @_anonymous__724:CNode_725{[0]: ValueNode<Primitive> Return, [1]: CNode_721}
+
+

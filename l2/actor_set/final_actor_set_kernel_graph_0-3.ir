@@ -1,0 +1,428 @@
+
+
+Base Block : kernel_graph_2
+
+%0 = EntranceActor()
+	# shape : -> 
+	# type : -> 
+	# device address : 
+	# AID : 136_4_✓__main___get_model__locals__TSModel_construct_584_EntranceActor
+%1 = kernel_graph2:Gather-op4(%0[3], %0[4], I64(0), I64(0))
+	# device context: CPU_0 
+	# shape : <null> <null> <NoShape> <NoShape> -> <(10, 3)> 
+	# type : <null> <null> <Int64> <Int64> -> <Tensor[Int32]> 
+	# device address : <0x61d0f19af9a0 : ref count:3> 
+	# AID : 28_Default/Gather-op4
+%2 = 7_FusionActor(%1[0], %0[2])
+	# shape : <(10, 3)> <null> -> <(10, 3)> <null> 
+	# type : <Tensor[Int32]> <null> -> <Tensor[Int32]> <null> 
+	# device address : <0x61d0f19af9a0 : ref count:3> <0> 
+	# AID : 7_FusionActor
+%3 = kernel_graph2:Gather-op5(%2[1], %2[0], I64(0), I64(0))
+	# device context: CPU_0 
+	# shape : <null> <(10, 3)> <NoShape> <NoShape> -> <(10, 3, 2)> 
+	# type : <null> <Tensor[Int32]> <Int64> <Int64> -> <Tensor[Int32]> 
+	# device address : <0x61d0f3130ca0 : ref count:2> 
+	# AID : 30_Default/Gather-op5
+%4 = kernel_graph2:Reshape-op3(%3[0], (30, 2))
+	# device context: CPU_0 
+	# shape : <(10, 3, 2)> <TupleShape(NoShape, NoShape)> -> <(30, 2)> 
+	# type : <Tensor[Int32]> <Tuple[Int64*2]> -> <Tensor[Int32]> 
+	# device address : <0x61d0f0304f00 : ref count:2> 
+	# AID : 31_Default/Reshape-op3
+%5 = kernel_graph2:Cast-op4(Tensor(shape=[], dtype=Int64, value=10)) op control(%0)
+	# device context: CPU_0 
+	# shape : <()> -> <()> 
+	# type : <Tensor[Int64]> -> <Tensor[Int32]> 
+	# device address : <0x61d0f1401ea0 : ref count:2> 
+	# AID : 37_Default/Cast-op4
+%6 = 8_FusionActor(%5[0], %4[0], %0[1])
+	# shape : <()> <(30, 2)> <null> -> <()> <(30, 2)> <null> 
+	# type : <Tensor[Int32]> <Tensor[Int32]> <null> -> <Tensor[Int32]> <Tensor[Int32]> <null> 
+	# device address : <0x61d0f1401ea0 : ref count:2> <0x61d0f0304f00 : ref count:2> <0> 
+	# AID : 8_FusionActor
+%7 = kernel_graph2:Sub-op1(%6[1], %6[2])
+	# device context: CPU_0 
+	# shape : <(30, 2)> <null> -> <(30, 2)> 
+	# type : <Tensor[Int32]> <null> -> <Tensor[Int32]> 
+	# device address : <0x61d0f0e536b0 : ref count:2> 
+	# AID : 32_Default/Sub-op1
+%8 = kernel_graph2:Square-op1(%7[0])
+	# device context: CPU_0 
+	# shape : <(30, 2)> -> <(30, 2)> 
+	# type : <Tensor[Int32]> -> <Tensor[Int32]> 
+	# device address : <0x61d0f26155d0 : ref count:2> 
+	# AID : 33_Default/Square-op1
+%9 = kernel_graph2:Cast-op1(%8[0], Tensor(shape=[], dtype=Int64, value=35))
+	# device context: CPU_0 
+	# shape : <(30, 2)> <()> -> <(30, 2)> 
+	# type : <Tensor[Int32]> <Tensor[Int64]> -> <Tensor[Int64]> 
+	# device address : <0x61d0f17ef480 : ref count:2> 
+	# AID : 34_Expand/_SumExt/Cast-op1
+%10 = kernel_graph2:ReduceSum-op1(%9[0], (1), Bool(0), Bool(0))
+	# device context: CPU_0 
+	# shape : <(30, 2)> <TupleShape(NoShape)> <NoShape> <NoShape> -> <(30)> 
+	# type : <Tensor[Int64]> <Tuple[Int64]> <Bool> <Bool> -> <Tensor[Int64]> 
+	# device address : <0x61d0f3390e50 : ref count:2> 
+	# AID : 35_Expand/_SumExt/ReduceSum-op1
+%11 = kernel_graph2:Neg-op4(%10[0])
+	# device context: CPU_0 
+	# shape : <(30)> -> <(30)> 
+	# type : <Tensor[Int64]> -> <Tensor[Int64]> 
+	# device address : <0x61d0f1decd90 : ref count:2> 
+	# AID : 36_Default/Neg-op4
+%12 = kernel_graph2:TopK-op2(%11[0], %6[0])
+	# device context: CPU_0 
+	# shape : <(30)> <()> -> <(10)> <(10)> 
+	# type : <Tensor[Int64]> <Tensor[Int32]> -> <Tensor[Int64]> <Tensor[Int32]> 
+	# device address : <0x61d0f57c7090 : ref count:2> <0x61d0f05071f0 : ref count:2> 
+	# AID : 38_Default/TopK-op2
+%13 = 11_FusionActor(%12[0])
+	# shape : <(10)> -> <(10)> 
+	# type : <Tensor[Int64]> -> <Tensor[Int64]> 
+	# device address : <0x61d0f57c7090 : ref count:2> 
+	# AID : 11_FusionActor
+%14 = kernel_graph2:Neg-op5(%13[0])
+	# device context: CPU_0 
+	# shape : <(10)> -> <(10)> 
+	# type : <Tensor[Int64]> -> <Tensor[Int64]> 
+	# device address : <0x61d0f2bddb10 : ref count:2> 
+	# AID : 39_Default/Neg-op5
+%15 = kernel_graph2:Cast-op5(%14[0])
+	# device context: CPU_0 
+	# shape : <(10)> -> <(10)> 
+	# type : <Tensor[Int64]> -> <Tensor[Int32]> 
+	# device address : <0x61d0f5587210 : ref count:2> 
+	# AID : 40_Default/Cast-op5
+%16 = kernel_graph2:Cast-op6(Tensor(shape=[], dtype=Int64, value=102)) op control(%0)
+	# device context: CPU_0 
+	# shape : <()> -> <()> 
+	# type : <Tensor[Int64]> -> <Tensor[Int32]> 
+	# device address : <0x61d0f7393120 : ref count:2> 
+	# AID : 44_Default/Cast-op6
+%17 = 9_FusionActor(%16[0], %15[0], %0[0])
+	# shape : <()> <(10)> <null> -> <()> <(10)> <null> 
+	# type : <Tensor[Int32]> <Tensor[Int32]> <null> -> <Tensor[Int32]> <Tensor[Int32]> <null> 
+	# device address : <0x61d0f7393120 : ref count:2> <0x61d0f5587210 : ref count:2> <0> 
+	# AID : 9_FusionActor
+%18 = kernel_graph2:Concat-op3(%17[2], %17[1], I64(0))
+	# device context: CPU_0 
+	# shape : <null> <(10)> <NoShape> -> <(112)> 
+	# type : <null> <Tensor[Int32]> <Int64> -> <Tensor[Int32]> 
+	# device address : <0x61d0f19ad8d0 : ref count:2> 
+	# AID : 41_Default/Concat-op3
+%19 = kernel_graph2:Neg-op6(%18[0])
+	# device context: CPU_0 
+	# shape : <(112)> -> <(112)> 
+	# type : <Tensor[Int32]> -> <Tensor[Int32]> 
+	# device address : <0x61d0f74a1cc0 : ref count:2> 
+	# AID : 43_Default/Neg-op6
+%20 = kernel_graph2:TopK-op3(%19[0], %17[0])
+	# device context: CPU_0 
+	# shape : <(112)> <()> -> <(102)> <(102)> 
+	# type : <Tensor[Int32]> <Tensor[Int32]> -> <Tensor[Int32]> <Tensor[Int32]> 
+	# device address : <0x61d0f1c11e80 : ref count:2> <0x61d0f1917b50 : ref count:2> 
+	# AID : 48_Default/TopK-op3
+%21 = kernel_graph2:Neg-op7(%20[0])
+	# device context: CPU_0 
+	# shape : <(102)> -> <(102)> 
+	# type : <Tensor[Int32]> -> <Tensor[Int32]> 
+	# device address : <0x61d0f5cb3b00 : ref count:18446744073709551615> 
+	# AID : 49_Default/Neg-op7
+%22 = kernel_graph2:Reshape-op2(%1[0], (30))
+	# device context: CPU_0 
+	# shape : <(10, 3)> <TupleShape(NoShape)> -> <(30)> 
+	# type : <Tensor[Int32]> <Tuple[Int64]> -> <Tensor[Int32]> 
+	# device address : <0x61d0f1adec50 : ref count:2> 
+	# AID : 29_Default/Reshape-op2
+%23 = kernel_graph2:Gather-op6(%22[0], %12[1], I64(0), I64(0))
+	# device context: CPU_0 
+	# shape : <(30)> <(10)> <NoShape> <NoShape> -> <(10)> 
+	# type : <Tensor[Int32]> <Tensor[Int32]> <Int64> <Int64> -> <Tensor[Int32]> 
+	# device address : <0x61d0f61e7b90 : ref count:3> 
+	# AID : 42_Default/Gather-op6
+%24 = kernel_graph2:Concat-op2(%0[5], %23[0], I64(0))
+	# device context: CPU_0 
+	# shape : <null> <(10)> <NoShape> -> <(112)> 
+	# type : <null> <Tensor[Int32]> <Int64> -> <Tensor[Int32]> 
+	# device address : <0x61d0f7844160 : ref count:2> 
+	# AID : 45_Default/Concat-op2
+%25 = kernel_graph2:Gather-op7(%24[0], %20[1], I64(0), I64(0))
+	# device context: CPU_0 
+	# shape : <(112)> <(102)> <NoShape> <NoShape> -> <(102)> 
+	# type : <Tensor[Int32]> <Tensor[Int32]> <Int64> <Int64> -> <Tensor[Int32]> 
+	# device address : <0x61d0f6e3bfb0 : ref count:18446744073709551615> 
+	# AID : 50_Default/Gather-op7
+%26 = 12_FusionActor(%23[0])
+	# shape : <(10)> -> <(10)> 
+	# type : <Tensor[Int32]> -> <Tensor[Int32]> 
+	# device address : <0x61d0f61e7b90 : ref count:3> 
+	# AID : 12_FusionActor
+%27 = kernel_graph2:Maximum-op1(%26[0], Tensor(shape=[], dtype=Int32, value=0))
+	# device context: CPU_0 
+	# shape : <(10)> <()> -> <(10)> 
+	# type : <Tensor[Int32]> <Tensor[Int32]> -> <Tensor[Int32]> 
+	# device address : <0x61d0f711b580 : ref count:2> 
+	# AID : 46_Expand/_ClampScalar/Maximum-op1
+%28 = kernel_graph2:Minimum-op1(%27[0], Tensor(shape=[], dtype=Int32, value=1068))
+	# device context: CPU_0 
+	# shape : <(10)> <()> -> <(10)> 
+	# type : <Tensor[Int32]> <Tensor[Int32]> -> <Tensor[Int32]> 
+	# device address : <0x61d0f6555e40 : ref count:18446744073709551615> 
+	# AID : 47_Expand/_ClampScalar/Minimum-op1
+%29 = 10_FusionActor(%28[0], %25[0], %21[0]) op control(%0)
+	# shape : <(10)> <(102)> <(102)> -> <(10)> <(102)> <(102)> 
+	# type : <Tensor[Int32]> <Tensor[Int32]> <Tensor[Int32]> -> <Tensor[Int32]> <Tensor[Int32]> <Tensor[Int32]> 
+	# device address : <0x61d0f6555e40 : ref count:18446744073709551615> <0x61d0f6e3bfb0 : ref count:18446744073709551615> <0x61d0f5cb3b00 : ref count:18446744073709551615> 
+	# AID : 10_FusionActor
+%30 = kernel_graph2:Print-op2(main_loop_fn ====) op control(%29)
+	# device context: CPU_0 
+	# shape : <NoShape> -> <(1)> 
+	# type : <String> -> <Tensor[Int32]> 
+	# device address : <0x61d0f7935470 : ref count:1> 
+	# AID : 51_Default/Print-op2
+%31 = kernel_graph2:Print-op3(%29[0], %29[1], %29[2]) op control(%30)
+	# device context: CPU_0 
+	# shape : <(10)> <(102)> <(102)> -> <(1)> 
+	# type : <Tensor[Int32]> <Tensor[Int32]> <Tensor[Int32]> -> <Tensor[Int32]> 
+	# device address : <0x61d0f08fbed0 : ref count:1> 
+	# AID : 52_Default/Print-op3
+%32 = kernel_graph_2_ExitActor(%25[0], %28[0], %21[0]) op control(%31)
+	# shape : <(102)> <(10)> <(102)> -> <(102)> <(10)> <(102)> 
+	# type : <Tensor[Int32]> <Tensor[Int32]> <Tensor[Int32]> -> <Tensor[Int32]> <Tensor[Int32]> <Tensor[Int32]> 
+	# device address : <0x61d0f6e3bfb0 : ref count:18446744073709551615> <0x61d0f6555e40 : ref count:18446744073709551615> <0x61d0f5cb3b00 : ref count:18446744073709551615> 
+	# AID : kernel_graph_2_ExitActor
+
+
+Base Block : kernel_graph_0
+
+%0 = EntranceActor(kernel_graph_0-3_HostDSActor[3], kernel_graph_0-3_HostDSActor[1], kernel_graph_0-3_HostDSActor[0], kernel_graph_0-3_HostDSActor[2])
+	# shape : <null> <null> <null> <null> -> <null> <null> <null> <null> 
+	# type : <null> <null> <null> <null> -> <null> <null> <null> <null> 
+	# device address : <0> <0> <0> <0> 
+	# AID : 135_1___main___get_model__locals__TSModel_construct_553_EntranceActor
+%1 = kernel_graph0:Cast-op0(%0[2])
+	# device context: CPU_0 
+	# shape : <null> -> <(1, 2)> 
+	# type : <null> -> <Tensor[Int32]> 
+	# device address : <0x61d0f728b410 : ref count:18446744073709551615> 
+	# AID : 4_Default/Cast-op0
+%2 = kernel_graph0:Gather-op0(%0[1], %0[3], I64(0), I64(0))
+	# device context: CPU_0 
+	# shape : <null> <null> <NoShape> <NoShape> -> <(10, 3)> 
+	# type : <null> <null> <Int64> <Int64> -> <Tensor[Int32]> 
+	# device address : <0x61d0f7376e70 : ref count:3> 
+	# AID : 0_Default/Gather-op0
+%3 = kernel_graph0:Cast-op1(Tensor(shape=[], dtype=Int64, value=10)) op control(%0)
+	# device context: CPU_0 
+	# shape : <()> -> <()> 
+	# type : <Tensor[Int64]> -> <Tensor[Int32]> 
+	# device address : <0x61d0f7ed97b0 : ref count:2> 
+	# AID : 10_Default/Cast-op1
+%4 = 1_FusionActor(%3[0], %2[0], %0[0], %1[0])
+	# shape : <()> <(10, 3)> <null> <(1, 2)> -> <()> <(10, 3)> <null> <(1, 2)> 
+	# type : <Tensor[Int32]> <Tensor[Int32]> <null> <Tensor[Int32]> -> <Tensor[Int32]> <Tensor[Int32]> <null> <Tensor[Int32]> 
+	# device address : <0x61d0f7ed97b0 : ref count:2> <0x61d0f7376e70 : ref count:3> <0> <0x61d0f728b410 : ref count:18446744073709551615> 
+	# AID : 1_FusionActor
+%5 = kernel_graph0:Gather-op1(%4[2], %4[1], I64(0), I64(0))
+	# device context: CPU_0 
+	# shape : <null> <(10, 3)> <NoShape> <NoShape> -> <(10, 3, 2)> 
+	# type : <null> <Tensor[Int32]> <Int64> <Int64> -> <Tensor[Int32]> 
+	# device address : <0x61d0f77d9bc0 : ref count:2> 
+	# AID : 2_Default/Gather-op1
+%6 = kernel_graph0:Reshape-op1(%5[0], (30, 2))
+	# device context: CPU_0 
+	# shape : <(10, 3, 2)> <TupleShape(NoShape, NoShape)> -> <(30, 2)> 
+	# type : <Tensor[Int32]> <Tuple[Int64*2]> -> <Tensor[Int32]> 
+	# device address : <0x61d0f7819db0 : ref count:2> 
+	# AID : 3_Default/Reshape-op1
+%7 = kernel_graph0:Sub-op0(%6[0], %4[3])
+	# device context: CPU_0 
+	# shape : <(30, 2)> <(1, 2)> -> <(30, 2)> 
+	# type : <Tensor[Int32]> <Tensor[Int32]> -> <Tensor[Int32]> 
+	# device address : <0x61d0f77d7e00 : ref count:2> 
+	# AID : 5_Default/Sub-op0
+%8 = kernel_graph0:Square-op0(%7[0])
+	# device context: CPU_0 
+	# shape : <(30, 2)> -> <(30, 2)> 
+	# type : <Tensor[Int32]> -> <Tensor[Int32]> 
+	# device address : <0x61d0f7835280 : ref count:2> 
+	# AID : 6_Default/Square-op0
+%9 = kernel_graph0:Cast-op0(%8[0], Tensor(shape=[], dtype=Int64, value=35))
+	# device context: CPU_0 
+	# shape : <(30, 2)> <()> -> <(30, 2)> 
+	# type : <Tensor[Int32]> <Tensor[Int64]> -> <Tensor[Int64]> 
+	# device address : <0x61d0f78048d0 : ref count:2> 
+	# AID : 7_Expand/_SumExt/Cast-op0
+%10 = kernel_graph0:ReduceSum-op0(%9[0], (1), Bool(0), Bool(0))
+	# device context: CPU_0 
+	# shape : <(30, 2)> <TupleShape(NoShape)> <NoShape> <NoShape> -> <(30)> 
+	# type : <Tensor[Int64]> <Tuple[Int64]> <Bool> <Bool> -> <Tensor[Int64]> 
+	# device address : <0x61d0f7384050 : ref count:2> 
+	# AID : 8_Expand/_SumExt/ReduceSum-op0
+%11 = kernel_graph0:Neg-op0(%10[0])
+	# device context: CPU_0 
+	# shape : <(30)> -> <(30)> 
+	# type : <Tensor[Int64]> -> <Tensor[Int64]> 
+	# device address : <0x61d0f7353620 : ref count:2> 
+	# AID : 9_Default/Neg-op0
+%12 = kernel_graph0:TopK-op0(%11[0], %4[0])
+	# device context: CPU_0 
+	# shape : <(30)> <()> -> <(10)> <(10)> 
+	# type : <Tensor[Int64]> <Tensor[Int32]> -> <Tensor[Int64]> <Tensor[Int32]> 
+	# device address : <0x61d0f6be8800 : ref count:2> <0x61d0f757e620 : ref count:2> 
+	# AID : 11_Default/TopK-op0
+%13 = 4_FusionActor(%12[0])
+	# shape : <(10)> -> <(10)> 
+	# type : <Tensor[Int64]> -> <Tensor[Int64]> 
+	# device address : <0x61d0f6be8800 : ref count:2> 
+	# AID : 4_FusionActor
+%14 = kernel_graph0:Neg-op1(%13[0])
+	# device context: CPU_0 
+	# shape : <(10)> -> <(10)> 
+	# type : <Tensor[Int64]> -> <Tensor[Int64]> 
+	# device address : <0x61d0f6caaf90 : ref count:2> 
+	# AID : 12_Default/Neg-op1
+%15 = kernel_graph0:Cast-op2(%14[0])
+	# device context: CPU_0 
+	# shape : <(10)> -> <(10)> 
+	# type : <Tensor[Int64]> -> <Tensor[Int32]> 
+	# device address : <0x61d0f6f18a50 : ref count:2> 
+	# AID : 13_Default/Cast-op2
+%16 = kernel_graph0:Concat-op1(Tensor(shape=[102], dtype=Int32, value=[...]), %15[0], I64(0))
+	# device context: CPU_0 
+	# shape : <(102)> <(10)> <NoShape> -> <(112)> 
+	# type : <Tensor[Int32]> <Tensor[Int32]> <Int64> -> <Tensor[Int32]> 
+	# device address : <0x61d0f73305b0 : ref count:2> 
+	# AID : 14_Default/Concat-op1
+%17 = kernel_graph0:Neg-op2(%16[0])
+	# device context: CPU_0 
+	# shape : <(112)> -> <(112)> 
+	# type : <Tensor[Int32]> -> <Tensor[Int32]> 
+	# device address : <0x61d0f8131590 : ref count:2> 
+	# AID : 16_Default/Neg-op2
+%18 = 2_FusionActor(%17[0]) op control(%0)
+	# shape : <(112)> -> <(112)> 
+	# type : <Tensor[Int32]> -> <Tensor[Int32]> 
+	# device address : <0x61d0f8131590 : ref count:2> 
+	# AID : 2_FusionActor
+%19 = kernel_graph0:Cast-op3(Tensor(shape=[], dtype=Int64, value=102)) op control(%18)
+	# device context: CPU_0 
+	# shape : <()> -> <()> 
+	# type : <Tensor[Int64]> -> <Tensor[Int32]> 
+	# device address : <0x61d0f7f62a80 : ref count:2> 
+	# AID : 17_Default/Cast-op3
+%20 = kernel_graph0:TopK-op1(%18[0], %19[0])
+	# device context: CPU_0 
+	# shape : <(112)> <()> -> <(102)> <(102)> 
+	# type : <Tensor[Int32]> <Tensor[Int32]> -> <Tensor[Int32]> <Tensor[Int32]> 
+	# device address : <0x61d0f256ad30 : ref count:2> <0x61d0f3f60a70 : ref count:2> 
+	# AID : 18_Default/TopK-op1
+%21 = kernel_graph0:Neg-op3(%20[0])
+	# device context: CPU_0 
+	# shape : <(102)> -> <(102)> 
+	# type : <Tensor[Int32]> -> <Tensor[Int32]> 
+	# device address : <0x61d0f2ee61f0 : ref count:18446744073709551615> 
+	# AID : 19_Default/Neg-op3
+%22 = kernel_graph0:Reshape-op0(%2[0], (30))
+	# device context: CPU_0 
+	# shape : <(10, 3)> <TupleShape(NoShape)> -> <(30)> 
+	# type : <Tensor[Int32]> <Tuple[Int64]> -> <Tensor[Int32]> 
+	# device address : <0x61d0f7388180 : ref count:2> 
+	# AID : 1_Default/Reshape-op0
+%23 = kernel_graph0:Gather-op2(%22[0], %12[1], I64(0), I64(0))
+	# device context: CPU_0 
+	# shape : <(30)> <(10)> <NoShape> <NoShape> -> <(10)> 
+	# type : <Tensor[Int32]> <Tensor[Int32]> <Int64> <Int64> -> <Tensor[Int32]> 
+	# device address : <0x61d0f713bec0 : ref count:3> 
+	# AID : 15_Default/Gather-op2
+%24 = kernel_graph0:Concat-op0(Tensor(shape=[102], dtype=Int32, value=[...]), %23[0], I64(0))
+	# device context: CPU_0 
+	# shape : <(102)> <(10)> <NoShape> -> <(112)> 
+	# type : <Tensor[Int32]> <Tensor[Int32]> <Int64> -> <Tensor[Int32]> 
+	# device address : <0x61d0f36d1040 : ref count:2> 
+	# AID : 20_Default/Concat-op0
+%25 = kernel_graph0:Gather-op3(%24[0], %20[1], I64(0), I64(0))
+	# device context: CPU_0 
+	# shape : <(112)> <(102)> <NoShape> <NoShape> -> <(102)> 
+	# type : <Tensor[Int32]> <Tensor[Int32]> <Int64> <Int64> -> <Tensor[Int32]> 
+	# device address : <0x61d0f78c0190 : ref count:18446744073709551615> 
+	# AID : 21_Default/Gather-op3
+%26 = 5_FusionActor(%23[0])
+	# shape : <(10)> -> <(10)> 
+	# type : <Tensor[Int32]> -> <Tensor[Int32]> 
+	# device address : <0x61d0f713bec0 : ref count:3> 
+	# AID : 5_FusionActor
+%27 = kernel_graph0:Maximum-op0(%26[0], Tensor(shape=[], dtype=Int32, value=0))
+	# device context: CPU_0 
+	# shape : <(10)> <()> -> <(10)> 
+	# type : <Tensor[Int32]> <Tensor[Int32]> -> <Tensor[Int32]> 
+	# device address : <0x61d0f78bff80 : ref count:2> 
+	# AID : 22_Expand/_ClampScalar/Maximum-op0
+%28 = kernel_graph0:Minimum-op0(%27[0], Tensor(shape=[], dtype=Int32, value=1068))
+	# device context: CPU_0 
+	# shape : <(10)> <()> -> <(10)> 
+	# type : <Tensor[Int32]> <Tensor[Int32]> -> <Tensor[Int32]> 
+	# device address : <0x61d0f79dbf80 : ref count:18446744073709551615> 
+	# AID : 23_Expand/_ClampScalar/Minimum-op0
+%29 = 3_FusionActor(%28[0], %25[0], %21[0]) op control(%0)
+	# shape : <(10)> <(102)> <(102)> -> <(10)> <(102)> <(102)> 
+	# type : <Tensor[Int32]> <Tensor[Int32]> <Tensor[Int32]> -> <Tensor[Int32]> <Tensor[Int32]> <Tensor[Int32]> 
+	# device address : <0x61d0f79dbf80 : ref count:18446744073709551615> <0x61d0f78c0190 : ref count:18446744073709551615> <0x61d0f2ee61f0 : ref count:18446744073709551615> 
+	# AID : 3_FusionActor
+%30 = kernel_graph0:Print-op0(main_loop_fn ====) op control(%29)
+	# device context: CPU_0 
+	# shape : <NoShape> -> <(1)> 
+	# type : <String> -> <Tensor[Int32]> 
+	# device address : <0x61d0f3dc5f50 : ref count:1> 
+	# AID : 26_Default/Print-op0
+%31 = kernel_graph0:Print-op1(%29[0], %29[1], %29[2]) op control(%30)
+	# device context: CPU_0 
+	# shape : <(10)> <(102)> <(102)> -> <(1)> 
+	# type : <Tensor[Int32]> <Tensor[Int32]> <Tensor[Int32]> -> <Tensor[Int32]> 
+	# device address : <0x61d0f41443e0 : ref count:1> 
+	# AID : 27_Default/Print-op1
+%32 = 6_FusionActor(%28[0])
+	# shape : <(10)> -> <(10)> 
+	# type : <Tensor[Int32]> -> <Tensor[Int32]> 
+	# device address : <0x61d0f79dbf80 : ref count:18446744073709551615> 
+	# AID : 6_FusionActor
+%33 = kernel_graph0:ReduceMax-op0(%32[0], (0), Bool(0))
+	# device context: CPU_0 
+	# shape : <(10)> <TupleShape(NoShape)> <NoShape> -> <()> 
+	# type : <Tensor[Int32]> <Tuple[Int64]> <Bool> -> <Tensor[Int32]> 
+	# device address : <0x61d0f7338110 : ref count:2> 
+	# AID : 24_Expand/_Max/ReduceMax-op0
+%34 = kernel_graph0:NotEqual-op0(%33[0], Tensor(shape=[], dtype=Int32, value=0))
+	# device context: CPU_0 
+	# shape : <()> <()> -> <()> 
+	# type : <Tensor[Int32]> <Tensor[Int32]> -> <Tensor[Bool]> 
+	# device address : <0x61d0f030aee0 : ref count:18446744073709551615> 
+	# AID : 25_Default/NotEqual-op0
+%35 = kernel_graph_0_ExitActor(%1[0], %28[0], %25[0], %21[0], %34[0]) op control(%31)
+	# shape : <(1, 2)> <(10)> <(102)> <(102)> <()> -> <(1, 2)> <(10)> <(102)> <(102)> <()> 
+	# type : <Tensor[Int32]> <Tensor[Int32]> <Tensor[Int32]> <Tensor[Int32]> <Tensor[Bool]> -> <Tensor[Int32]> <Tensor[Int32]> <Tensor[Int32]> <Tensor[Int32]> <Tensor[Bool]> 
+	# device address : <0x61d0f728b410 : ref count:18446744073709551615> <0x61d0f79dbf80 : ref count:18446744073709551615> <0x61d0f78c0190 : ref count:18446744073709551615> <0x61d0f2ee61f0 : ref count:18446744073709551615> <0x61d0f030aee0 : ref count:18446744073709551615> 
+	# AID : kernel_graph_0_ExitActor
+
+Actor for func graph:135_1___main___get_model__locals__TSModel_construct_553
+%0 = EntranceActor(param_centers, param_tree, param_vector_uint8, param_open_list)
+%1 = RunGraph[kernel_graph0]()
+%2 = ExitActor(%1[0], %1[3], %1[1], %1[2], %1[4])
+%3 = GatherActor(136_4_✓__main___get_model__locals__TSModel_construct_584, %2[3], %2[0], %0[0], %0[1], %2[1], %2[2], IO)
+%4 = GatherActor(137_100_✗__main___get_model__locals__TSModel_construct_585, %2[2], %2[3], %2[1], IO)
+%5 = SwitchActor(%2[4], %4[0], %3[0])
+%6 = GatherActor(%5[0])
+%7 = RunGraph[137_100_✗__main___get_model__locals__TSModel_construct_585, 136_4_✓__main___get_model__locals__TSModel_construct_584](%6[0])
+%8 = StackActor(%7[0], %7[1], %7[2])
+%9 = ExitActor(%8[0], %8[1], %8[2])
+
+Actor for func graph:136_4_✓__main___get_model__locals__TSModel_construct_584
+%0 = EntranceActor(param_Parameter_600, param_Parameter_598, param_centers, param_tree, param_Parameter_597, param_Parameter_599, param_io)
+%1 = RunGraph[kernel_graph2]()
+%2 = ExitActor(%1[0], %1[2], %1[1])
+%3 = ExitActor(%2[0], %2[2], %2[1])
+
+Actor for func graph:137_100_✗__main___get_model__locals__TSModel_construct_585
+%0 = EntranceActor(param_Parameter_602, param_Parameter_603, param_Parameter_604, param_io)
+%1 = ExitActor(%0[0], %0[1], %0[2])

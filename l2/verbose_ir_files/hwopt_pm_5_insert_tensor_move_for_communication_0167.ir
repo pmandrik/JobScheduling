@@ -1,0 +1,62 @@
+# IR entry: @kernel_graph1
+# Total subgraphs: 1
+
+# Attrs:
+enable_zero_copy_in_graph: 1
+
+# Total params: 4
+# Params:
+%para1__96162: <Tensor[Int32], (102)>  :  <Int32xDefaultFormat[const vector]{102}>  :  IsWeight: false
+%para2__96163: <Tensor[Int32], (102)>  :  <Int32xDefaultFormat[const vector]{102}>  :  IsWeight: false
+%para3__96164: <Tensor[Int32], (10)>  :  <Int32xDefaultFormat[const vector]{10}>  :  IsWeight: false
+%para4__96175: <IOMonad, NoShape>  :  <IOMonadxDefaultFormat[const vector]{}>  :  IsWeight: false
+
+Node counting information:
+Total number of nodes: 25
+Total number of cnodes: 9
+
+subgraph attr:
+enable_zero_copy_in_graph: 1
+subgraph instance: kernel_graph1 : 0x61d0f01967b0
+
+subgraph @kernel_graph1() {
+  %0(CNode_671) = MakeTuple(%para1_Parameter_672, %para2_Parameter_673, %para3_Parameter_674)
+      : (<Tensor[Int32], (102)>, <Tensor[Int32], (102)>, <Tensor[Int32], (10)>) -> (<Tuple[Tensor[Int32]*3], TupleShape((102), (102), (10))>)
+      : (Tensor, Tensor, Tensor) -> (TupleUnfold)
+      # Fullname with scope: (Default/MakeTuple-op9)
+  %1(CNode_675) = TupleGetItem(%0, I64(0)) cnode_attrs: {checkpoint: Bool(1), is_dynamic_len: Bool(0)}
+      : (<Tuple[Tensor[Int32]*3], TupleShape((102), (102), (10))>, <Int64, NoShape>) -> (<Tensor[Int32], (102)>)
+      : (TupleUnfold, Scalar) -> (Tensor)
+      # Fullname with scope: (Default/TupleGetItem-op8)
+  %2(CNode_676) = TupleGetItem(%0, I64(1)) cnode_attrs: {checkpoint: Bool(1), is_dynamic_len: Bool(0)}
+      : (<Tuple[Tensor[Int32]*3], TupleShape((102), (102), (10))>, <Int64, NoShape>) -> (<Tensor[Int32], (102)>)
+      : (TupleUnfold, Scalar) -> (Tensor)
+      # Fullname with scope: (Default/TupleGetItem-op9)
+  %3(CNode_677) = TupleGetItem(%0, I64(2)) cnode_attrs: {checkpoint: Bool(1), is_dynamic_len: Bool(0)}
+      : (<Tuple[Tensor[Int32]*3], TupleShape((102), (102), (10))>, <Int64, NoShape>) -> (<Tensor[Int32], (10)>)
+      : (TupleUnfold, Scalar) -> (Tensor)
+      # Fullname with scope: (Default/TupleGetItem-op10)
+  %4(CNode_678) = MakeTuple(%1, %2, %3) cnode_attrs: {checkpoint: Bool(1), is_dynamic_len: Bool(0)}
+      : (<Tensor[Int32], (102)>, <Tensor[Int32], (102)>, <Tensor[Int32], (10)>) -> (<Tuple[Tensor[Int32]*3], TupleShape((102), (102), (10))>)
+      : (Tensor, Tensor, Tensor) -> (TupleUnfold)
+      # Fullname with scope: (Default/MakeTuple-op7)
+      # In file /home/i/work/JobScheduling/l2/test3.py:100~139, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:139, 13~42/      return top_list, top_dist, open_list/
+  %5(CNode_679) = UpdateState(%para4_Parameter_680, %0) cnode_attrs: {checkpoint: Bool(1), is_dynamic_len: Bool(0)}
+      : (<IOMonad, NoShape>, <Tuple[Tensor[Int32]*3], TupleShape((102), (102), (10))>) -> (<IOMonad, NoShape>)
+      # Fullname with scope: (Default/UpdateState-op4)
+  %6(CNode_681) = Depend(%4, %5) primitive_attrs: {side_effect_propagate: I64(1)} cnode_attrs: {checkpoint: Bool(1), is_dynamic_len: Bool(0)}
+      : (<Tuple[Tensor[Int32]*3], TupleShape((102), (102), (10))>, <IOMonad, NoShape>) -> (<Tuple[Tensor[Int32]*3], TupleShape((102), (102), (10))>)
+      # Fullname with scope: (Default/Depend-op3)
+  %7(CNode_682) = MakeTuple(%6) cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<Tuple[Tensor[Int32]*3], TupleShape((102), (102), (10))>) -> (<Tuple[Tuple[Tensor[Int32]*3]], TupleShape(TupleShape((102), (102), (10)))>)
+      : (TupleUnfold) -> (TupleUnfold)
+      # Fullname with scope: (Default/MakeTuple-op10)
+  Return(%7)
+      : (<Tuple[Tuple[Tensor[Int32]*3]], TupleShape(TupleShape((102), (102), (10)))>)
+      # Fullname with scope: (Default/Return-op7)
+}
+# Order:
+#   1: @kernel_graph1:CNode_683{[0]: ValueNode<Primitive> Return, [1]: CNode_682}
+
+

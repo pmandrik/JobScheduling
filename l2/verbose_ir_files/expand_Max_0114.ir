@@ -1,0 +1,28 @@
+# IR entry: @_anonymous__659
+# Total subgraphs: 1
+
+# Total params: 1
+# Params:
+%para1_: <Tensor[Int32], (10)>
+
+Node counting information:
+Total number of nodes: 7
+Total number of cnodes: 2
+
+subgraph attr:
+subgraph instance: _anonymous__659 : 0x61d0f3130480
+
+subgraph @_anonymous__659() {
+  %0(CNode_657) = PrimFunc_ReduceMax(%para1_Parameter_658, (I64(0)), Bool(0)) primitive_attrs: {IsFeatureMapOutput: Bool(1), IsFeatureMapInputList: (0)}
+      : (<Tensor[Int32], (10)>, <Tuple[Int64], TupleShape(NoShape)>, <Bool, NoShape>) -> (<Tensor[Int32], ()>)
+      : (<Int32xDefaultFormat[const vector]{10}>, <Int64xDefaultFormat[const vector]{}>, <BoolxDefaultFormat[const vector]{}>) -> (<Int32xDefaultFormat[const vector]{}>)
+      : (Tensor, Tuple, Scalar) -> (Tensor)
+      # Fullname with scope: (Expand/_Max/ReduceMax-op0)
+  Return(%0)
+      : (<Tensor[Int32], ()>)
+      # Fullname with scope: (Default/Return-op6)
+}
+# Order:
+#   1: @_anonymous__659:CNode_660{[0]: ValueNode<Primitive> Return, [1]: CNode_657}
+
+

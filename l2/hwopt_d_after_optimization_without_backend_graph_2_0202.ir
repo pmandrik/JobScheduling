@@ -1,0 +1,318 @@
+# IR entry: @kernel_graph2
+# Total subgraphs: 1
+
+# Attrs:
+enable_zero_copy_in_graph: 1
+
+# Total params: 7
+# Params:
+%para1_io: <IOMonad, NoShape>  :  <IOMonadxDefaultFormat[const vector]{}>  :  IsWeight: false
+%para2_tree: <Tensor[Int32], (1069, 3)> : [1069, 3]  :  <Int32xDefaultFormat[const vector]{1069, 3}>  :  IsWeight: false
+%para3_: <Tensor[Int32], (10)>  :  <Int32xDefaultFormat[const vector]{10}>  :  IsWeight: false
+%para4_centers: <Tensor[Int32], (3200, 2)> : [3200, 2]  :  <Int32xDefaultFormat[const vector]{3200, 2}>  :  IsWeight: false
+%para5_: <Tensor[Int32], (1, 2)>  :  <Int32xDefaultFormat[const vector]{1, 2}>  :  IsWeight: false
+%para6_: <Tensor[Int32], (102)>  :  <Int32xDefaultFormat[const vector]{102}>  :  IsWeight: false
+%para7_: <Tensor[Int32], (102)>  :  <Int32xDefaultFormat[const vector]{102}>  :  IsWeight: false
+
+Node counting information:
+Total number of nodes: 84
+Total number of cnodes: 33
+
+subgraph attr:
+enable_zero_copy_in_graph: 1
+subgraph instance: kernel_graph2 : 0x61d0f6761bd0
+
+subgraph @kernel_graph2() {
+  %0(CNode_684) = PrimFunc_Gather(%para2_tree, %para3_Parameter_685, I64(0), I64(0)) primitive_attrs: {IsFeatureMapOutput: Bool(1), IsFeatureMapInputList: (0, 1), batch_dims: I64(0)} cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<Tensor[Int32], (1069, 3)>, <Tensor[Int32], (10)>, <Int64, NoShape>, <Int64, NoShape>) -> (<Tensor[Int32], (10, 3)>)
+      # Scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:100~139, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:114~123, 6~44/      def main_loop_fn(args):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:118, 39~61/        cand_top_list, cand_top_dist = self.process_open_list(centers, tree, vector, open_list)/
+      # In file /home/i/work/JobScheduling/l2/test3.py:67~84, 4~26/    def process_open_list(self, centers, tree, vector, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:83, 16~26/      indexes = ops.gather(child_indexes_flat, indexes, 0)/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9722~9788/def gather(input_params, input_indices, axis, batch_dims=0):/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9788, 11~55/    return gather_op(input_params, input_indices, axis)/
+  %1(CNode_686) = PrimFunc_Reshape(%0, (I64(30))) primitive_attrs: {IsFeatureMapOutput: Bool(1), IsFeatureMapInputList: (0)} cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<Tensor[Int32], (10, 3)>, <Tuple[Int64], TupleShape(NoShape), elements_use_flags={[const vector]{1}}>) -> (<Tensor[Int32], (30)>)
+      # Scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:100~139, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:114~123, 6~44/      def main_loop_fn(args):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:118, 39~61/        cand_top_list, cand_top_dist = self.process_open_list(centers, tree, vector, open_list)/
+      # In file /home/i/work/JobScheduling/l2/test3.py:67~84, 4~26/    def process_open_list(self, centers, tree, vector, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:79, 27~38/      child_indexes_flat = ops.reshape(child_indexes, (self.op_size*self.tree_degree,))/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:3195~3227/def reshape(input, shape):/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:3227, 11~35/    return reshape_op(input, shape)/
+  %2(CNode_687) = PrimFunc_Gather(%para4_centers, %0, I64(0), I64(0)) primitive_attrs: {IsFeatureMapOutput: Bool(1), IsFeatureMapInputList: (0, 1), batch_dims: I64(0)} cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<Tensor[Int32], (3200, 2)>, <Tensor[Int32], (10, 3)>, <Int64, NoShape>, <Int64, NoShape>) -> (<Tensor[Int32], (10, 3, 2)>)
+      # Scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:100~139, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:114~123, 6~44/      def main_loop_fn(args):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:118, 39~61/        cand_top_list, cand_top_dist = self.process_open_list(centers, tree, vector, open_list)/
+      # In file /home/i/work/JobScheduling/l2/test3.py:67~84, 4~26/    def process_open_list(self, centers, tree, vector, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:83, 16~26/      indexes = ops.gather(child_indexes_flat, indexes, 0)/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9722~9788/def gather(input_params, input_indices, axis, batch_dims=0):/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9788, 11~55/    return gather_op(input_params, input_indices, axis)/
+  %3(CNode_688) = PrimFunc_Reshape(%2, (I64(30), I64(2))) primitive_attrs: {IsFeatureMapOutput: Bool(1), IsFeatureMapInputList: (0)} cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<Tensor[Int32], (10, 3, 2)>, <Tuple[Int64*2], TupleShape(NoShape, NoShape), elements_use_flags={[const vector]{1, 1}}>) -> (<Tensor[Int32], (30, 2)>)
+      # Scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:100~139, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:114~123, 6~44/      def main_loop_fn(args):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:118, 39~61/        cand_top_list, cand_top_dist = self.process_open_list(centers, tree, vector, open_list)/
+      # In file /home/i/work/JobScheduling/l2/test3.py:67~84, 4~26/    def process_open_list(self, centers, tree, vector, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:79, 27~38/      child_indexes_flat = ops.reshape(child_indexes, (self.op_size*self.tree_degree,))/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:3195~3227/def reshape(input, shape):/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:3227, 11~35/    return reshape_op(input, shape)/
+  %4(d) = PrimFunc_Sub(%3, %para5_Parameter_689) primitive_attrs: {output_names: [output], IsFeatureMapOutput: Bool(1), IsFeatureMapInputList: (0, 1), input_names: [x, y]} cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<Tensor[Int32], (30, 2)>, <Tensor[Int32], (1, 2)>) -> (<Tensor[Int32], (30, 2)>)
+      # Scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:100~139, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:114~123, 6~44/      def main_loop_fn(args):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:118, 39~61/        cand_top_list, cand_top_dist = self.process_open_list(centers, tree, vector, open_list)/
+      # In file /home/i/work/JobScheduling/l2/test3.py:67~84, 4~26/    def process_open_list(self, centers, tree, vector, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:77, 11~23/      ls = self.calc_l2(selected_centers, vector)/
+      # In file /home/i/work/JobScheduling/l2/test3.py:58~65, 4~15/    def calc_l2(self, a, b):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:60, 10~15/      d = a - b/
+  %5(CNode_690) = PrimFunc_Square(%4) primitive_attrs: {IsFeatureMapOutput: Bool(1), IsFeatureMapInputList: (0)} cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<Tensor[Int32], (30, 2)>) -> (<Tensor[Int32], (30, 2)>)
+      # Scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:100~139, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:114~123, 6~44/      def main_loop_fn(args):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:118, 39~61/        cand_top_list, cand_top_dist = self.process_open_list(centers, tree, vector, open_list)/
+      # In file /home/i/work/JobScheduling/l2/test3.py:67~84, 4~26/    def process_open_list(self, centers, tree, vector, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:77, 11~23/      ls = self.calc_l2(selected_centers, vector)/
+      # In file /home/i/work/JobScheduling/l2/test3.py:58~65, 4~15/    def calc_l2(self, a, b):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:61, 11~21/      d2 = ops.square(d)/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:2704~2728/def square(input):/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:2728, 11~27/    return square_op(input)/
+  %6(CNode_691) = PrimFunc_SumExt(%5, (I64(1)), Bool(0), None) primitive_attrs: {IsFeatureMapOutput: Bool(1), IsFeatureMapInputList: (0)} cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<Tensor[Int32], (30, 2)>, <Tuple[Int64], TupleShape(NoShape), elements_use_flags={[const vector]{1}}>, <Bool, NoShape>, <None, NoShape>) -> (<Tensor[Int64], (30)>)
+      # Scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:100~139, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:114~123, 6~44/      def main_loop_fn(args):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:118, 39~61/        cand_top_list, cand_top_dist = self.process_open_list(centers, tree, vector, open_list)/
+      # In file /home/i/work/JobScheduling/l2/test3.py:67~84, 4~26/    def process_open_list(self, centers, tree, vector, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:77, 11~23/      ls = self.calc_l2(selected_centers, vector)/
+      # In file /home/i/work/JobScheduling/l2/test3.py:58~65, 4~15/    def calc_l2(self, a, b):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:63, 11~18/      ls = ops.sum(d2, dim=1, keepdim=False)/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/math_func.py:10741~10804/def sum(input, dim=None, keepdim=False, *, dtype=None):/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/math_func.py:10804, 11~49/    return sum_ext_op(input, dim, keepdim, dtype)/
+  %7(CNode_692) = PrimFunc_Neg(%6) primitive_attrs: {IsFeatureMapOutput: Bool(1), IsFeatureMapInputList: (0)} cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<Tensor[Int64], (30)>) -> (<Tensor[Int64], (30)>)
+      # Scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:100~139, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:114~123, 6~44/      def main_loop_fn(args):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:118, 39~61/        cand_top_list, cand_top_dist = self.process_open_list(centers, tree, vector, open_list)/
+      # In file /home/i/work/JobScheduling/l2/test3.py:67~84, 4~26/    def process_open_list(self, centers, tree, vector, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:78, 22~30/      tops, indexes = ops.topk(ls, self.op_size, largest=False, sorted=True)/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/array_func.py:5433~5507/def topk(input, k, dim=None, largest=True, sorted=True):/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/array_func.py:5492, 16~22/        input = -input/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9696~9719/def neg(input):/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9719, 11~24/    return neg_op(input)/
+  %8(res) = TopK(%7, I64(10)) primitive_attrs: {output_names: [values, indices], IsFeatureMapOutput: Bool(1), IsFeatureMapInputList: (0), sorted: Bool(1), input_names: [input, k]} cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<Tensor[Int64], (30)>, <Int64, NoShape>) -> (<Tuple[Tensor[Int64],Tensor[Int32]], TupleShape((10), (10))>)
+      # Scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:100~139, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:114~123, 6~44/      def main_loop_fn(args):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:118, 39~61/        cand_top_list, cand_top_dist = self.process_open_list(centers, tree, vector, open_list)/
+      # In file /home/i/work/JobScheduling/l2/test3.py:67~84, 4~26/    def process_open_list(self, centers, tree, vector, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:78, 22~30/      tops, indexes = ops.topk(ls, self.op_size, largest=False, sorted=True)/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/array_func.py:5433~5507/def topk(input, k, dim=None, largest=True, sorted=True):/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/array_func.py:5495, 18~34/            res = top_k_(input, k)/
+  %9(CNode_693) = TupleGetItem(%8, I64(1)) cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<Tuple[Tensor[Int64],Tensor[Int32]], TupleShape((10), (10))>, <Int64, NoShape>) -> (<Tensor[Int32], (10)>)
+      # Scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:100~139, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:114~123, 6~44/      def main_loop_fn(args):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:118, 39~61/        cand_top_list, cand_top_dist = self.process_open_list(centers, tree, vector, open_list)/
+      # In file /home/i/work/JobScheduling/l2/test3.py:67~84, 4~26/    def process_open_list(self, centers, tree, vector, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:78, 22~30/      tops, indexes = ops.topk(ls, self.op_size, largest=False, sorted=True)/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/array_func.py:5433~5507/def topk(input, k, dim=None, largest=True, sorted=True):/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/array_func.py:5496, 39~45/            values, indices = -res[0], res[1]/
+  %10(CNode_694) = PrimFunc_Gather(%1, %9, I64(0), I64(0)) primitive_attrs: {IsFeatureMapOutput: Bool(1), IsFeatureMapInputList: (0, 1), batch_dims: I64(0)} cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<Tensor[Int32], (30)>, <Tensor[Int32], (10)>, <Int64, NoShape>, <Int64, NoShape>) -> (<Tensor[Int32], (10)>)
+      # Scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:100~139, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:114~123, 6~44/      def main_loop_fn(args):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:118, 39~61/        cand_top_list, cand_top_dist = self.process_open_list(centers, tree, vector, open_list)/
+      # In file /home/i/work/JobScheduling/l2/test3.py:67~84, 4~26/    def process_open_list(self, centers, tree, vector, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:83, 16~26/      indexes = ops.gather(child_indexes_flat, indexes, 0)/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9722~9788/def gather(input_params, input_indices, axis, batch_dims=0):/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9788, 11~55/    return gather_op(input_params, input_indices, axis)/
+  %11(CNode_695) = MakeTuple(%para7_Parameter_696, %10) cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<Tensor[Int32], (102)>, <Tensor[Int32], (10)>) -> (<Tuple[Tensor[Int32]*2], TupleShape((102), (10))>)
+      # Scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:100~139, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:114~123, 6~44/      def main_loop_fn(args):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:119, 29~49/        top_list, top_dist = self.update_top_list(top_list, top_dist, cand_top_list, cand_top_dist)/
+      # In file /home/i/work/JobScheduling/l2/test3.py:86~94, 4~35/    def update_top_list(self, top_list, top_dist, cand_top_list, cand_top_dist):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:90, 36~61/      tot_index = mindspore.ops.cat((top_list, cand_top_list))/
+  %12(CNode_697) = PrimFunc_Concat(%11, I64(0)) primitive_attrs: {IsFeatureMapOutput: Bool(1), IsFeatureMapInputList: (0)} cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<Tuple[Tensor[Int32]*2], TupleShape((102), (10))>, <Int64, NoShape>) -> (<Tensor[Int32], (112)>)
+      # Scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:100~139, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:114~123, 6~44/      def main_loop_fn(args):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:119, 29~49/        top_list, top_dist = self.update_top_list(top_list, top_dist, cand_top_list, cand_top_dist)/
+      # In file /home/i/work/JobScheduling/l2/test3.py:86~94, 4~35/    def update_top_list(self, top_list, top_dist, cand_top_list, cand_top_dist):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:90, 18~35/      tot_index = mindspore.ops.cat((top_list, cand_top_list))/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:4754~4784/def cat(tensors, axis=0):/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:4784, 11~37/    return concat_impl(tensors, axis)/
+  %13(CNode_698) = TupleGetItem(%8, I64(0)) cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<Tuple[Tensor[Int64],Tensor[Int32]], TupleShape((10), (10))>, <Int64, NoShape>) -> (<Tensor[Int64], (10)>)
+      # Scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:100~139, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:114~123, 6~44/      def main_loop_fn(args):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:118, 39~61/        cand_top_list, cand_top_dist = self.process_open_list(centers, tree, vector, open_list)/
+      # In file /home/i/work/JobScheduling/l2/test3.py:67~84, 4~26/    def process_open_list(self, centers, tree, vector, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:78, 22~30/      tops, indexes = ops.topk(ls, self.op_size, largest=False, sorted=True)/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/array_func.py:5433~5507/def topk(input, k, dim=None, largest=True, sorted=True):/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/array_func.py:5496, 31~37/            values, indices = -res[0], res[1]/
+  %14(CNode_699) = PrimFunc_Neg(%13) primitive_attrs: {IsFeatureMapOutput: Bool(1), IsFeatureMapInputList: (0)} cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<Tensor[Int64], (10)>) -> (<Tensor[Int64], (10)>)
+      # Scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:100~139, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:114~123, 6~44/      def main_loop_fn(args):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:118, 39~61/        cand_top_list, cand_top_dist = self.process_open_list(centers, tree, vector, open_list)/
+      # In file /home/i/work/JobScheduling/l2/test3.py:67~84, 4~26/    def process_open_list(self, centers, tree, vector, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:78, 22~30/      tops, indexes = ops.topk(ls, self.op_size, largest=False, sorted=True)/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/array_func.py:5433~5507/def topk(input, k, dim=None, largest=True, sorted=True):/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/array_func.py:5492, 16~22/        input = -input/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9696~9719/def neg(input):/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9719, 11~24/    return neg_op(input)/
+  %15(CNode_718) = PrimFunc_Cast(%14) primitive_attrs: {output_names: [output], is_backend_cast: Bool(0), IsFeatureMapOutput: Bool(1), IsFeatureMapInputList: (0), input_names: [x, dst_type], dst_type: I64(34)} cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<Tensor[Int64], (10)>) -> (<Tensor[Int32], (10)>)
+      # Scope: (Default)
+      # Corresponding code candidate:
+      # In file /home/i/work/JobScheduling/l2/test3.py:100~139, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:104, 15~23/      vector = ops.cast(vector_uint8, dtype=mindspore.int32)/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9889~9917/def cast(input, dtype):/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9917, 11~32/    return cast_op(input, dtype)/
+  %16(CNode_701) = MakeTuple(%para6_Parameter_702, %15) cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<Tensor[Int32], (102)>, <Tensor[Int32], (10)>) -> (<Tuple[Tensor[Int32]*2], TupleShape((102), (10))>)
+      # Scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:100~139, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:114~123, 6~44/      def main_loop_fn(args):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:119, 29~49/        top_list, top_dist = self.update_top_list(top_list, top_dist, cand_top_list, cand_top_dist)/
+      # In file /home/i/work/JobScheduling/l2/test3.py:86~94, 4~35/    def update_top_list(self, top_list, top_dist, cand_top_list, cand_top_dist):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:89, 36~61/      tot_dist  = mindspore.ops.cat((top_dist, cand_top_dist))/
+  %17(CNode_703) = PrimFunc_Concat(%16, I64(0)) primitive_attrs: {IsFeatureMapOutput: Bool(1), IsFeatureMapInputList: (0)} cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<Tuple[Tensor[Int32]*2], TupleShape((102), (10))>, <Int64, NoShape>) -> (<Tensor[Int32], (112)>)
+      # Scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:100~139, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:114~123, 6~44/      def main_loop_fn(args):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:119, 29~49/        top_list, top_dist = self.update_top_list(top_list, top_dist, cand_top_list, cand_top_dist)/
+      # In file /home/i/work/JobScheduling/l2/test3.py:86~94, 4~35/    def update_top_list(self, top_list, top_dist, cand_top_list, cand_top_dist):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:90, 18~35/      tot_index = mindspore.ops.cat((top_list, cand_top_list))/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:4754~4784/def cat(tensors, axis=0):/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:4784, 11~37/    return concat_impl(tensors, axis)/
+  %18(CNode_704) = PrimFunc_Neg(%17) primitive_attrs: {IsFeatureMapOutput: Bool(1), IsFeatureMapInputList: (0)} cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<Tensor[Int32], (112)>) -> (<Tensor[Int32], (112)>)
+      # Scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:100~139, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:114~123, 6~44/      def main_loop_fn(args):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:118, 39~61/        cand_top_list, cand_top_dist = self.process_open_list(centers, tree, vector, open_list)/
+      # In file /home/i/work/JobScheduling/l2/test3.py:67~84, 4~26/    def process_open_list(self, centers, tree, vector, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:78, 22~30/      tops, indexes = ops.topk(ls, self.op_size, largest=False, sorted=True)/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/array_func.py:5433~5507/def topk(input, k, dim=None, largest=True, sorted=True):/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/array_func.py:5492, 16~22/        input = -input/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9696~9719/def neg(input):/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9719, 11~24/    return neg_op(input)/
+  %19(res) = TopK(%18, I64(102)) primitive_attrs: {output_names: [values, indices], IsFeatureMapOutput: Bool(1), IsFeatureMapInputList: (0), sorted: Bool(1), input_names: [input, k]} cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<Tensor[Int32], (112)>, <Int64, NoShape>) -> (<Tuple[Tensor[Int32]*2], TupleShape((102), (102))>)
+      # Scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:100~139, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:114~123, 6~44/      def main_loop_fn(args):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:118, 39~61/        cand_top_list, cand_top_dist = self.process_open_list(centers, tree, vector, open_list)/
+      # In file /home/i/work/JobScheduling/l2/test3.py:67~84, 4~26/    def process_open_list(self, centers, tree, vector, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:78, 22~30/      tops, indexes = ops.topk(ls, self.op_size, largest=False, sorted=True)/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/array_func.py:5433~5507/def topk(input, k, dim=None, largest=True, sorted=True):/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/array_func.py:5495, 18~34/            res = top_k_(input, k)/
+  %20(CNode_705) = TupleGetItem(%19, I64(1)) cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<Tuple[Tensor[Int32]*2], TupleShape((102), (102))>, <Int64, NoShape>) -> (<Tensor[Int32], (102)>)
+      # Scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:100~139, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:114~123, 6~44/      def main_loop_fn(args):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:118, 39~61/        cand_top_list, cand_top_dist = self.process_open_list(centers, tree, vector, open_list)/
+      # In file /home/i/work/JobScheduling/l2/test3.py:67~84, 4~26/    def process_open_list(self, centers, tree, vector, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:78, 22~30/      tops, indexes = ops.topk(ls, self.op_size, largest=False, sorted=True)/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/array_func.py:5433~5507/def topk(input, k, dim=None, largest=True, sorted=True):/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/array_func.py:5496, 39~45/            values, indices = -res[0], res[1]/
+  %21(CNode_706) = PrimFunc_Gather(%12, %20, I64(0), I64(0)) primitive_attrs: {IsFeatureMapOutput: Bool(1), IsFeatureMapInputList: (0, 1), batch_dims: I64(0)} cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<Tensor[Int32], (112)>, <Tensor[Int32], (102)>, <Int64, NoShape>, <Int64, NoShape>) -> (<Tensor[Int32], (102)>)
+      # Scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:100~139, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:114~123, 6~44/      def main_loop_fn(args):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:118, 39~61/        cand_top_list, cand_top_dist = self.process_open_list(centers, tree, vector, open_list)/
+      # In file /home/i/work/JobScheduling/l2/test3.py:67~84, 4~26/    def process_open_list(self, centers, tree, vector, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:83, 16~26/      indexes = ops.gather(child_indexes_flat, indexes, 0)/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9722~9788/def gather(input_params, input_indices, axis, batch_dims=0):/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9788, 11~55/    return gather_op(input_params, input_indices, axis)/
+  %22(CNode_707) = TupleGetItem(%19, I64(0)) cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<Tuple[Tensor[Int32]*2], TupleShape((102), (102))>, <Int64, NoShape>) -> (<Tensor[Int32], (102)>)
+      # Scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:100~139, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:114~123, 6~44/      def main_loop_fn(args):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:118, 39~61/        cand_top_list, cand_top_dist = self.process_open_list(centers, tree, vector, open_list)/
+      # In file /home/i/work/JobScheduling/l2/test3.py:67~84, 4~26/    def process_open_list(self, centers, tree, vector, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:78, 22~30/      tops, indexes = ops.topk(ls, self.op_size, largest=False, sorted=True)/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/array_func.py:5433~5507/def topk(input, k, dim=None, largest=True, sorted=True):/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/array_func.py:5496, 31~37/            values, indices = -res[0], res[1]/
+  %23(CNode_708) = PrimFunc_Neg(%22) primitive_attrs: {IsFeatureMapOutput: Bool(1), IsFeatureMapInputList: (0)} cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<Tensor[Int32], (102)>) -> (<Tensor[Int32], (102)>)
+      # Scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:100~139, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:114~123, 6~44/      def main_loop_fn(args):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:118, 39~61/        cand_top_list, cand_top_dist = self.process_open_list(centers, tree, vector, open_list)/
+      # In file /home/i/work/JobScheduling/l2/test3.py:67~84, 4~26/    def process_open_list(self, centers, tree, vector, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:78, 22~30/      tops, indexes = ops.topk(ls, self.op_size, largest=False, sorted=True)/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/array_func.py:5433~5507/def topk(input, k, dim=None, largest=True, sorted=True):/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/array_func.py:5492, 16~22/        input = -input/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9696~9719/def neg(input):/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9719, 11~24/    return neg_op(input)/
+  %24(CNode_709) = PrimFunc_ClampScalar(%10, I64(0), I64(1068)) primitive_attrs: {IsFeatureMapOutput: Bool(1), IsFeatureMapInputList: (0)} cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<Tensor[Int32], (10)>, <Int64, NoShape>, <Int64, NoShape>) -> (<Tensor[Int32], (10)>)
+      # Scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:100~139, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:114~123, 6~44/      def main_loop_fn(args):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:120, 20~41/        open_list = self.update_open_list(tree, cand_top_list)/
+      # In file /home/i/work/JobScheduling/l2/test3.py:96~98, 4~22/    def update_open_list(self, tree, cand_top_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:97, 18~36/      open_list = mindspore.ops.clip(cand_top_list, 0, tree.shape[0]-1)/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/clip_func.py:340~347/def clip(input, min=None, max=None):/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/clip_func.py:347, 11~16/    return clamp(input, min, max)/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/clip_func.py:227~276/def clamp(input, min=None, max=None):/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/clip_func.py:276, 11~23/    return clamp_scalar(input, min, max)/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:4291~4345/def clamp_scalar(input, min=None, max=None):/
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:4345, 11~43/    return clamp_scalar_op(input, min, max)/
+  %25(CNode_710) = MakeTuple(%21, %23, %24) cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<Tensor[Int32], (102)>, <Tensor[Int32], (102)>, <Tensor[Int32], (10)>) -> (<Tuple[Tensor[Int32]*3], TupleShape((102), (102), (10))>)
+      # Scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:100~139, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:136~137, 8~74/        main_loop_init_state = (open_list, top_list, top_dist)/
+  %26(CNode_711) = Print("main_loop_fn ====", %para1_io) primitive_attrs: {IsFeatureMapOutput: Bool(0), IsFeatureMapInputList: (), side_effect_io: Bool(1)} cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<String, NoShape>, <IOMonad, NoShape>) -> (<Tensor[Int32], (1)>)
+      # Scope: (Default)
+  %27(CNode_712) = UpdateState(%para1_io, %26) cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<IOMonad, NoShape>, <Tensor[Int32], (1)>) -> (<IOMonad, NoShape>)
+      # Scope: (Default)
+  %28(CNode_713) = Print(%24, %21, %23, %27) primitive_attrs: {IsFeatureMapOutput: Bool(1), IsFeatureMapInputList: (0, 1, 2), side_effect_io: Bool(1)} cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<Tensor[Int32], (10)>, <Tensor[Int32], (102)>, <Tensor[Int32], (102)>, <IOMonad, NoShape>) -> (<Tensor[Int32], (1)>)
+      # Scope: (Default)
+  %29(CNode_714) = UpdateState(%27, %28) cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<IOMonad, NoShape>, <Tensor[Int32], (1)>) -> (<IOMonad, NoShape>)
+      # Scope: (Default)
+  %30(CNode_715) = Depend(%25, %29) primitive_attrs: {side_effect_propagate: I64(1)} cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<Tuple[Tensor[Int32]*3], TupleShape((102), (102), (10))>, <IOMonad, NoShape>) -> (<Tuple[Tensor[Int32]*3], TupleShape((102), (102), (10))>)
+      # Scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:100~139, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:136~137, 8~74/        main_loop_init_state = (open_list, top_list, top_dist)/
+  %31(CNode_716) = MakeTuple(%30) cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<Tuple[Tensor[Int32]*3], TupleShape((102), (102), (10))>) -> (<Tuple[Tuple[Tensor[Int32]*3]], TupleShape(TupleShape((102), (102), (10)))>)
+      # Scope: (Default)
+  Return(%31)
+      : (<Tuple[Tuple[Tensor[Int32]*3]], TupleShape(TupleShape((102), (102), (10)))>)
+      # Scope: (Default)
+}
+# Order:
+#   1: @kernel_graph2:CNode_717{[0]: ValueNode<Primitive> Return, [1]: CNode_716}
+
+

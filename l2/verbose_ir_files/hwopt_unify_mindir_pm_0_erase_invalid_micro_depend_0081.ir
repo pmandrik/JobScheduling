@@ -1,0 +1,45 @@
+# IR entry: @137_100_✗__main___get_model__locals__TSModel_construct_585
+# Total subgraphs: 1
+
+# Attrs:
+defer_inline: 0
+undeterminate: 0
+less_bn: 0
+
+# Total params: 4
+# Params:
+%para1_: <Tensor[Int32], (102)>
+%para2_: <Tensor[Int32], (102)>
+%para3_: <Tensor[Int32], (10)>
+%para4_io: <IOMonad, NoShape>
+
+Node counting information:
+Total number of nodes: 10
+Total number of cnodes: 3
+
+indirect: 1
+subgraph attr:
+defer_inline: 0
+undeterminate: 0
+less_bn: 0
+subgraph instance: 137_100_✗__main___get_model__locals__TSModel_construct_585 : 0x61d0f0252650
+# In file /home/i/work/JobScheduling/l2/test3.py:100~139, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+subgraph @137_100_✗__main___get_model__locals__TSModel_construct_585() {
+  %0(ValueNode_581) = MakeTuple(%para1_Parameter_602, %para2_Parameter_603, %para3_Parameter_604) cnode_attrs: {is_dynamic_len: Bool(0)}
+      : (<Tensor[Int32], (102)>, <Tensor[Int32], (102)>, <Tensor[Int32], (10)>) -> (<Tuple[Tensor[Int32]*3], TupleShape((102), (102), (10)), elements_use_flags={[const vector]{1, 1, 1}}>)
+      # Fullname with scope: (Default/MakeTuple-op6)
+      # In file /home/i/work/JobScheduling/l2/test3.py:100~139, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:135~137, 6~74/      if cond_func((open_list, top_list, top_dist)):/
+  %1(CNode_582) = Depend(%0, %para4_io) primitive_attrs: {side_effect_propagate: I64(1)}
+      : (<Tuple[Tensor[Int32]*3], TupleShape((102), (102), (10)), elements_use_flags={[const vector]{1, 1, 1}}>, <IOMonad, NoShape>) -> (<Tuple[Tensor[Int32]*3], TupleShape((102), (102), (10)), elements_use_flags={[const vector]{1, 1, 1}}>)
+      # Fullname with scope: (Default/Depend-op2)
+      # In file /home/i/work/JobScheduling/l2/test3.py:100~139, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:135~137, 6~74/      if cond_func((open_list, top_list, top_dist)):/
+  Return(%1)
+      : (<Tuple[Tensor[Int32]*3], TupleShape((102), (102), (10)), elements_use_flags={[const vector]{1, 1, 1}}>)
+      # Fullname with scope: (Default/Return-op1)
+      # In file /home/i/work/JobScheduling/l2/test3.py:100~139, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+      # In file /home/i/work/JobScheduling/l2/test3.py:135~137, 6~74/      if cond_func((open_list, top_list, top_dist)):/
+}
+
+

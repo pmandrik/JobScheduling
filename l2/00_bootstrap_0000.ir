@@ -1,0 +1,34 @@
+# IR entry: @__main___get_model__locals__TSModel_construct_7
+# Total subgraphs: 1
+
+# Total params: 4
+# Params:
+%para1_centers: <null>
+%para2_tree: <null>
+%para3_vector_uint8: <null>
+%para4_open_list: <null>
+
+Node counting information:
+Total number of nodes: 11
+Total number of cnodes: 3
+
+subgraph attr:
+subgraph instance: __main___get_model__locals__TSModel_construct_7 : 0x61d0effd2600
+
+subgraph @__main___get_model__locals__TSModel_construct_7() {
+  %0(CNode_1) = resolve(NameSpace[Entry: '__main__.get_model.<locals>.TSModel.construct'], __main__.get_model.<locals>.TSModel.construct)
+      : (<null>, <null>) -> (<null>)
+      # Fullname with scope: (Default/resolve-op0)
+  %1(CNode_2) = %0(%para1_Parameter_3, %para2_Parameter_4, %para3_Parameter_5, %para4_Parameter_6)
+      : (<null>, <null>, <null>, <null>) -> (<null>)
+      # Fullname with scope: (0)
+  Return(%1)
+      : (<null>)
+      # Fullname with scope: (Default/Return-op0)
+}
+# Order:
+#   1: @__main___get_model__locals__TSModel_construct_7:CNode_1{[0]: ValueNode<Primitive> resolve, [1]: ValueNode<NameSpace> Entry: '__main__.get_model.<locals>.TSModel.construct', [2]: ValueNode<Symbol> __main__.get_model.<locals>.TSModel.construct}
+#   2: @__main___get_model__locals__TSModel_construct_7:CNode_2{[0]: CNode_1, [1]: param_Parameter_3, [2]: param_Parameter_4, [3]: param_Parameter_5, [4]: param_Parameter_6}
+#   3: @__main___get_model__locals__TSModel_construct_7:CNode_8{[0]: ValueNode<Primitive> Return, [1]: CNode_2}
+
+

@@ -1,0 +1,623 @@
+# ===============================================================================================
+# The following shows the last analyze fail log message.
+# ===============================================================================================
+
+----------------------------------------------------
+- Caught exception:
+----------------------------------------------------
+Type Join Failed: dtype1 = Bool, dtype2 = Any.
+For more details, please refer to https://www.mindspore.cn/search?inputValue=Type%20Join%20Failed
+
+----------------------------------------------------
+- Framework Error Message: (For framework developers)
+----------------------------------------------------
+This: AbstractScalar(Type: Bool, Value: true, Shape: NoShape), other: AbstractTensor(shape: (), element: AbstractScalar(Type: Bool, Value: ValueAny, Shape: NoShape), value_ptr: 0x5846f6be8df0, value: ValueAny). Please check the node: @334_329_144___main___get_model__locals__TSModel_construct_471:CNode_474{[0]: CNode_475}
+
+----------------------------------------------------
+- The Function Call Stack: (For framework developers)
+----------------------------------------------------
+In file /home/i/work/JobScheduling/l2/test3.py:128, 39~53/        return max(open_list) != 0 and max_loops >= 0/
+In file /home/i/work/JobScheduling/l2/test3.py:124~128, 6~53/      @mindspore.jit/
+In file /home/i/work/JobScheduling/l2/test3.py:99~135, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+
+----------------------------------------------------
+- C++ Call Stack: (For framework developers)
+----------------------------------------------------
+mindspore/core/abstract/abstract_value.cc:96 TypeJoinLogging
+
+----------------------------------------------------
+- The Traceback of Net Construct Code:
+----------------------------------------------------
+# 0 In file /home/i/work/JobScheduling/l2/test3.py:128, 39~53
+        return max(open_list) != 0 and max_loops >= 0
+                                       ^~~~~~~~~~~~~~
+
+Type Join Failed: dtype1 = Bool, dtype2 = Any.
+For more details, please refer to https://www.mindspore.cn/search?inputValue=Type%20Join%20Failed
+
+----------------------------------------------------
+- Framework Error Message: (For framework developers)
+----------------------------------------------------
+This: AbstractScalar(Type: Bool, Value: true, Shape: NoShape), other: AbstractTensor(shape: (), element: AbstractScalar(Type: Bool, Value: ValueAny, Shape: NoShape), value_ptr: 0x5846f6be8df0, value: ValueAny). Please check the node: @334_329_144___main___get_model__locals__TSModel_construct_471:CNode_474{[0]: CNode_475}
+
+----------------------------------------------------
+- The Function Call Stack: (For framework developers)
+----------------------------------------------------
+In file /home/i/work/JobScheduling/l2/test3.py:128, 39~53/        return max(open_list) != 0 and max_loops >= 0/
+In file /home/i/work/JobScheduling/l2/test3.py:124~128, 6~53/      @mindspore.jit/
+In file /home/i/work/JobScheduling/l2/test3.py:99~135, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+
+----------------------------------------------------
+- C++ Call Stack: (For framework developers)
+----------------------------------------------------
+mindspore/core/abstract/abstract_value.cc:96 TypeJoinLogging
+
+----------------------------------------------------
+- The Traceback of Net Construct Code:
+----------------------------------------------------
+# 0 In file /home/i/work/JobScheduling/l2/test3.py:128, 39~53
+        return max(open_list) != 0 and max_loops >= 0
+                                       ^~~~~~~~~~~~~~
+
+# ===============================================================================================
+# The following shows the IR when the function graphs evaluation fails to help locate the problem.
+# You can search the last ------------------------> to the node which is evaluated failure.
+# Refer to https://www.mindspore.cn/search?inputValue=analyze_fail.ir to get more instructions.
+# ===============================================================================================
+
+# IR entry: @334_329_144___main___get_model__locals__TSModel_construct_471
+# Total subgraphs: 4
+
+# Attrs:
+has_shard: 0
+flash_sp_send_recv_has_attached: 1
+has_attached: 1
+check_set_strategy_valid_once_only: 1
+FLASH_SP_RUN_ONCE_ONLY: 1
+FIAS_SP_RUN_ONCE_ONLY: 1
+less_bn: 0
+auto_parallel_finish_pre_action: 1
+
+# Total params: 4
+# Params:
+%para1_centers: <null>
+%para2_tree: <null>
+%para3_vector_uint8: <null>
+%para4_open_list: <null>
+
+subgraph attr:
+has_shard: 0
+flash_sp_send_recv_has_attached: 1
+has_attached: 1
+check_set_strategy_valid_once_only: 1
+FLASH_SP_RUN_ONCE_ONLY: 1
+FIAS_SP_RUN_ONCE_ONLY: 1
+less_bn: 0
+auto_parallel_finish_pre_action: 1
+subgraph instance: 334_329_144___main___get_model__locals__TSModel_construct_471 : 0x584701e648f0
+# In file /home/i/work/JobScheduling/l2/test3.py:99~135, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+subgraph @334_329_144___main___get_model__locals__TSModel_construct_471() {
+  %0(main_loop_init_state) = MakeTuple(%para4_open_list, Tensor(shape=[102], dtype=Int32, value=[...]), Tensor(shape=[102], dtype=Int32, value=[...]), I64(10))
+      : (<Tensor[Int32], (10)>, <Tensor[Int32], (102)>, <Tensor[Int32], (102)>, <Int64, NoShape>) -> (<Tuple[Tensor[Int32]*3,Int64], TupleShape((10), (102), (102), NoShape)>)
+      #scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:111, 29~71/      main_loop_init_state = (open_list, top_list, top_dist, max_loops)/
+  %1(CNode_476) = Print(%0, IOMonad[IO]) primitive_attrs: {side_effect_io: Bool(1)}
+      : (<Tuple[Tensor[Int32]*3,Int64], TupleShape((10), (102), (102), NoShape)>, <IOMonad, NoShape>) -> (<Tensor[Int32], (1)>)
+      #scope: (Default)
+  %2(CNode_477) = UpdateState(IOMonad[IO], %1)
+      : (<IOMonad, NoShape>, <Tensor[Int32], (1)>) -> (<IOMonad, NoShape>)
+      #scope: (Default)
+  %3(CNode_478) = Print("process_open_list", %2) primitive_attrs: {side_effect_io: Bool(1)}
+      : (<String, NoShape>, <IOMonad, NoShape>) -> (<Tensor[Int32], (1)>)
+      #scope: (Default)
+  %4(CNode_479) = UpdateState(%2, %3)
+      : (<IOMonad, NoShape>, <Tensor[Int32], (1)>) -> (<IOMonad, NoShape>)
+      #scope: (Default)
+  %5(CNode_480) = Print(%para4_open_list, %4) primitive_attrs: {side_effect_io: Bool(1)}
+      : (<Tensor[Int32], (10)>, <IOMonad, NoShape>) -> (<Tensor[Int32], (1)>)
+      #scope: (Default)
+  %6(CNode_481) = UpdateState(%4, %5)
+      : (<IOMonad, NoShape>, <Tensor[Int32], (1)>) -> (<IOMonad, NoShape>)
+      #scope: (Default)
+  %7(CNode_482) = Print(%para2_tree, %6) primitive_attrs: {side_effect_io: Bool(1)}
+      : (<Tensor[Int32], (1069, 3)>, <IOMonad, NoShape>) -> (<Tensor[Int32], (1)>)
+      #scope: (Default)
+  %8(CNode_483) = UpdateState(%6, %7)
+      : (<IOMonad, NoShape>, <Tensor[Int32], (1)>) -> (<IOMonad, NoShape>)
+      #scope: (Default)
+  %9(CNode_484) = PrimFunc_Gather(%para2_tree, %para4_open_list, I64(0), I64(0))
+      : (<Tensor[Int32], (1069, 3)>, <Tensor[Int32], (10)>, <Int64, NoShape>, <Int64, NoShape>) -> (<Tensor[Int32], (10, 3)>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9788, 11~55/    return gather_op(input_params, input_indices, axis)/
+  %10(CNode_485) = Print(%9, %para1_centers, %8) primitive_attrs: {side_effect_io: Bool(1)}
+      : (<Tensor[Int32], (10, 3)>, <Tensor[Int32], (3200, 2)>, <IOMonad, NoShape>) -> (<Tensor[Int32], (1)>)
+      #scope: (Default)
+  %11(CNode_486) = UpdateState(%8, %10)
+      : (<IOMonad, NoShape>, <Tensor[Int32], (1)>) -> (<IOMonad, NoShape>)
+      #scope: (Default)
+  %12(CNode_487) = PrimFunc_Gather(%para1_centers, %9, I64(0), I64(0))
+      : (<Tensor[Int32], (3200, 2)>, <Tensor[Int32], (10, 3)>, <Int64, NoShape>, <Int64, NoShape>) -> (<Tensor[Int32], (10, 3, 2)>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9788, 11~55/    return gather_op(input_params, input_indices, axis)/
+  %13(CNode_488) = PrimFunc_Reshape(%12, (I64(30), I64(2)))
+      : (<Tensor[Int32], (10, 3, 2)>, <Tuple[Int64*2], TupleShape(NoShape, NoShape)>) -> (<Tensor[Int32], (30, 2)>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:3227, 11~35/    return reshape_op(input, shape)/
+  %14(CNode_489) = Print(%13, %11) primitive_attrs: {side_effect_io: Bool(1)}
+      : (<Tensor[Int32], (30, 2)>, <IOMonad, NoShape>) -> (<Tensor[Int32], (1)>)
+      #scope: (Default)
+  %15(CNode_490) = UpdateState(%11, %14)
+      : (<IOMonad, NoShape>, <Tensor[Int32], (1)>) -> (<IOMonad, NoShape>)
+      #scope: (Default)
+  %16(CNode_491$ls) = Print("calc_l2 === === === === === ===", %15) primitive_attrs: {side_effect_io: Bool(1)}
+      : (<String, NoShape>, <IOMonad, NoShape>) -> (<Tensor[Int32], (1)>)
+      #scope: (Default)
+  %17(CNode_492$ls) = UpdateState(%15, %16)
+      : (<IOMonad, NoShape>, <Tensor[Int32], (1)>) -> (<IOMonad, NoShape>)
+      #scope: (Default)
+  %18(CNode_493) = PrimFunc_Cast(%para3_vector_uint8, I64(34)) primitive_attrs: {output_names: [output], input_names: [x, dst_type]}
+      : (<Tensor[UInt8], (1, 2)>, <Int64, NoShape>) -> (<Tensor[Int32], (1, 2)>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9917, 11~32/    return cast_op(input, dtype)/
+  %19(d) = PrimFunc_Sub(%13, %18) primitive_attrs: {output_names: [output], input_names: [x, y]}
+      : (<Tensor[Int32], (30, 2)>, <Tensor[Int32], (1, 2)>) -> (<Tensor[Int32], (30, 2)>)
+      #scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:59, 10~15/      d = a - b/
+  %20(CNode_494$d2$ls) = PrimFunc_Square(%19)
+      : (<Tensor[Int32], (30, 2)>) -> (<Tensor[Int32], (30, 2)>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:2728, 11~27/    return square_op(input)/
+  %21(CNode_495$ls) = Print("a = ", %13, "b = ", %18, "d = ", %19, "d2 = ", %20, %17) primitive_attrs: {side_effect_io: Bool(1)}
+      : (<String, NoShape>, <Tensor[Int32], (30, 2)>, <String, NoShape>, <Tensor[Int32], (1, 2)>, <String, NoShape>, <Tensor[Int32], (30, 2)>, <String, NoShape>, <Tensor[Int32], (30, 2)>, <IOMonad, NoShape>) -> (<Tensor[Int32], (1)>)
+      #scope: (Default)
+  %22(CNode_496$ls) = UpdateState(%17, %21)
+      : (<IOMonad, NoShape>, <Tensor[Int32], (1)>) -> (<IOMonad, NoShape>)
+      #scope: (Default)
+  %23(CNode_497) = PrimFunc_SumExt(%20, (I64(1)), Bool(0), None)
+      : (<Tensor[Int32], (30, 2)>, <Tuple[Int64], TupleShape(NoShape)>, <Bool, NoShape>, <None, NoShape>) -> (<Tensor[Int64], (30)>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/math_func.py:10804, 11~49/    return sum_ext_op(input, dim, keepdim, dtype)/
+  %24(CNode_498$ls) = Print("dist = ", %23, %22) primitive_attrs: {side_effect_io: Bool(1)}
+      : (<String, NoShape>, <Tensor[Int64], (30)>, <IOMonad, NoShape>) -> (<Tensor[Int32], (1)>)
+      #scope: (Default)
+  %25(CNode_499$ls) = UpdateState(%22, %24)
+      : (<IOMonad, NoShape>, <Tensor[Int32], (1)>) -> (<IOMonad, NoShape>)
+      #scope: (Default)
+  %26(CNode_500) = PrimFunc_Reshape(%9, (I64(30)))
+      : (<Tensor[Int32], (10, 3)>, <Tuple[Int64], TupleShape(NoShape)>) -> (<Tensor[Int32], (30)>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:3227, 11~35/    return reshape_op(input, shape)/
+  %27(CNode_501) = Print(%26, %25) primitive_attrs: {side_effect_io: Bool(1)}
+      : (<Tensor[Int32], (30)>, <IOMonad, NoShape>) -> (<Tensor[Int32], (1)>)
+      #scope: (Default)
+  %28(CNode_502) = UpdateState(%25, %27)
+      : (<IOMonad, NoShape>, <Tensor[Int32], (1)>) -> (<IOMonad, NoShape>)
+      #scope: (Default)
+  %29(CNode_503) = PrimFunc_Neg(%23)
+      : (<Tensor[Int64], (30)>) -> (<Tensor[Int64], (30)>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9719, 11~24/    return neg_op(input)/
+  %30(res) = TopK(%29, I64(10)) primitive_attrs: {output_names: [values, indices], sorted: Bool(1), input_names: [input, k]}
+      : (<Tensor[Int64], (30)>, <Int64, NoShape>) -> (<Tuple[Tensor[Int64],Tensor[Int32]], TupleShape((10), (10))>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/array_func.py:5495, 18~34/            res = top_k_(input, k)/
+  %31(CNode_504) = TupleGetItem(%30, I64(1))
+      : (<Tuple[Tensor[Int64],Tensor[Int32]], TupleShape((10), (10))>, <Int64, NoShape>) -> (<Tensor[Int32], (10)>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/array_func.py:5496, 39~45/            values, indices = -res[0], res[1]/
+  %32(CNode_505) = Print(%31, %28) primitive_attrs: {side_effect_io: Bool(1)}
+      : (<Tensor[Int32], (10)>, <IOMonad, NoShape>) -> (<Tensor[Int32], (1)>)
+      #scope: (Default)
+  %33(CNode_506) = UpdateState(%28, %32)
+      : (<IOMonad, NoShape>, <Tensor[Int32], (1)>) -> (<IOMonad, NoShape>)
+      #scope: (Default)
+  %34(CNode_507) = Print("Int32", "Int64", %33) primitive_attrs: {side_effect_io: Bool(1)}
+      : (<String, NoShape>, <String, NoShape>, <IOMonad, NoShape>) -> (<Tensor[Int32], (1)>)
+      #scope: (Default)
+  %35(CNode_508) = UpdateState(%33, %34)
+      : (<IOMonad, NoShape>, <Tensor[Int32], (1)>) -> (<IOMonad, NoShape>)
+      #scope: (Default)
+  %36(CNode_509) = Print("LOOP:", I64(9), %35) primitive_attrs: {side_effect_io: Bool(1)}
+      : (<String, NoShape>, <Int64, NoShape>, <IOMonad, NoShape>) -> (<Tensor[Int32], (1)>)
+      #scope: (Default)
+  %37(CNode_510) = TupleGetItem(%30, I64(0))
+      : (<Tuple[Tensor[Int64],Tensor[Int32]], TupleShape((10), (10))>, <Int64, NoShape>) -> (<Tensor[Int64], (10)>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/array_func.py:5496, 31~37/            values, indices = -res[0], res[1]/
+  %38(CNode_511) = PrimFunc_Neg(%37)
+      : (<Tensor[Int64], (10)>) -> (<Tensor[Int64], (10)>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9719, 11~24/    return neg_op(input)/
+  %39(CNode_512) = PrimFunc_Cast(%38, I64(34)) primitive_attrs: {output_names: [output], input_names: [x, dst_type]}
+      : (<Tensor[Int64], (10)>, <Int64, NoShape>) -> (<Tensor[Int32], (10)>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9917, 11~32/    return cast_op(input, dtype)/
+  %40(CNode_513) = MakeTuple(Tensor(shape=[102], dtype=Int32, value=[...]), %39)
+      : (<Tensor[Int32], (102)>, <Tensor[Int32], (10)>) -> (<Tuple[Tensor[Int32]*2], TupleShape((102), (10))>)
+      #scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:88, 36~61/      tot_dist  = mindspore.ops.cat((top_dist, cand_top_dist))/
+  %41(CNode_514) = PrimFunc_Concat(%40, I64(0))
+      : (<Tuple[Tensor[Int32]*2], TupleShape((102), (10))>, <Int64, NoShape>) -> (<Tensor[Int32], (112)>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:4784, 11~37/    return concat_impl(tensors, axis)/
+  %42(CNode_515) = PrimFunc_Neg(%41)
+      : (<Tensor[Int32], (112)>) -> (<Tensor[Int32], (112)>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9719, 11~24/    return neg_op(input)/
+  %43(res) = TopK(%42, I64(102)) primitive_attrs: {output_names: [values, indices], sorted: Bool(1), input_names: [input, k]}
+      : (<Tensor[Int32], (112)>, <Int64, NoShape>) -> (<Tuple[Tensor[Int32]*2], TupleShape((102), (102))>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/array_func.py:5495, 18~34/            res = top_k_(input, k)/
+  %44(CNode_516) = TupleGetItem(%43, I64(0))
+      : (<Tuple[Tensor[Int32]*2], TupleShape((102), (102))>, <Int64, NoShape>) -> (<Tensor[Int32], (102)>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/array_func.py:5496, 31~37/            values, indices = -res[0], res[1]/
+  %45(CNode_517) = PrimFunc_Neg(%44)
+      : (<Tensor[Int32], (102)>) -> (<Tensor[Int32], (102)>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9719, 11~24/    return neg_op(input)/
+  %46(CNode_518) = PrimFunc_Gather(%26, %31, I64(0), I64(0))
+      : (<Tensor[Int32], (30)>, <Tensor[Int32], (10)>, <Int64, NoShape>, <Int64, NoShape>) -> (<Tensor[Int32], (10)>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9788, 11~55/    return gather_op(input_params, input_indices, axis)/
+  %47(CNode_519) = MakeTuple(Tensor(shape=[102], dtype=Int32, value=[...]), %46)
+      : (<Tensor[Int32], (102)>, <Tensor[Int32], (10)>) -> (<Tuple[Tensor[Int32]*2], TupleShape((102), (10))>)
+      #scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:89, 36~61/      tot_index = mindspore.ops.cat((top_list, cand_top_list))/
+  %48(CNode_520) = PrimFunc_Concat(%47, I64(0))
+      : (<Tuple[Tensor[Int32]*2], TupleShape((102), (10))>, <Int64, NoShape>) -> (<Tensor[Int32], (112)>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:4784, 11~37/    return concat_impl(tensors, axis)/
+  %49(CNode_521) = TupleGetItem(%43, I64(1))
+      : (<Tuple[Tensor[Int32]*2], TupleShape((102), (102))>, <Int64, NoShape>) -> (<Tensor[Int32], (102)>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/array_func.py:5496, 39~45/            values, indices = -res[0], res[1]/
+  %50(CNode_522) = PrimFunc_Gather(%48, %49, I64(0), I64(0))
+      : (<Tensor[Int32], (112)>, <Tensor[Int32], (102)>, <Int64, NoShape>, <Int64, NoShape>) -> (<Tensor[Int32], (102)>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9788, 11~55/    return gather_op(input_params, input_indices, axis)/
+  %51(CNode_523) = MakeTuple(%36, %45, %50)
+      : (<Tensor[Int32], (1)>, <Tensor[Int32], (102)>, <Tensor[Int32], (102)>) -> (<Tuple[Tensor[Int32]*3], TupleShape((1), (102), (102))>)
+      #scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:124~128, 6~53/      @mindspore.jit/
+  %52(CNode_524) = StopGradient(%51)
+      : (<Tuple[Tensor[Int32]*3], TupleShape((1), (102), (102))>) -> (<Tuple[Tensor[Int32]*3], TupleShape((1), (102), (102))>)
+      #scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:124~128, 6~53/      @mindspore.jit/
+  %53(CNode_525$open_list$open_list) = PrimFunc_ClampScalar(%46, I64(0), I64(1068))
+      : (<Tensor[Int32], (10)>, <Int64, NoShape>, <Int64, NoShape>) -> (<Tensor[Int32], (10)>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:4345, 11~43/    return clamp_scalar_op(input, min, max)/
+  %54(CNode_526) = PrimFunc_Max(%53)
+      : (<Tensor[Int32], (10)>) -> (<Tensor[Int32], ()>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9957, 11~24/    return max_op(input)/
+  %55(CNode_527) = PrimFunc_NotEqual(%54, Tensor(shape=[], dtype=Int32, value=0))
+      : (<Tensor[Int32], ()>, <Tensor[Int32], ()>) -> (<Tensor[Bool], ()>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:7897, 11~37/    return not_equal_op(input, other)/
+  %56(CNode_528) = Partial(@338_333_288_↱cond_func_473, %55) primitive_attrs: {side_effect_propagate: I64(1)}
+      : (<Func, NoShape>, <Tensor[Bool], ()>) -> (<Func, NoShape>)
+      #scope: (Default)
+  %57(CNode_475) = Switch(%55, @337_332_286_↰cond_func_472, %56)
+      : (<Tensor[Bool], ()>, <Func, NoShape>, <Func, NoShape>) -> (<Func, NoShape>)
+      #scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:128, 39~53/        return max(open_list) != 0 and max_loops >= 0/
+
+#------------------------> 0
+  %58(CNode_474) = %57()
+      #scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:128, 39~53/        return max(open_list) != 0 and max_loops >= 0/
+  %59(CNode_529) = Depend(%58, %52) primitive_attrs: {side_effect_propagate: I64(1)} cnode_attrs: {topo_sort_rhs_first: Bool(1)}
+      : (<null>, <Tuple[Tensor[Int32]*3], TupleShape((1), (102), (102))>) -> (<null>)
+      #scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:128, 39~53/        return max(open_list) != 0 and max_loops >= 0/
+  %60(CNode_530) = MakeTuple(%59)
+      : (<null>) -> (<null>)
+      #scope: (Default)
+  %61(CNode_531) = UpdateState(%35, %36)
+      : (<IOMonad, NoShape>, <Tensor[Int32], (1)>) -> (<null>)
+      #scope: (Default)
+  %62(CNode_532) = PyExecute("bool(__input__)", ("__input__"), %60, %61) primitive_attrs: {side_effect_io: Bool(1), primitive_target: "CPU"}
+      : (<null>, <null>, <null>, <null>) -> (<null>)
+      #scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:132~133, 6~85/      if cond_func((open_list, top_list, top_dist, max_loops)):/
+  %63(CNode_533) = UpdateState(%61, %62)
+      : (<null>, <null>) -> (<null>)
+      #scope: (Default)
+  %64(CNode_534) = Partial(@335_330_147_✓__main___get_model__locals__TSModel_construct_535, %18, %para1_centers, %para2_tree, %para4_open_list, %para4_open_list, %63) primitive_attrs: {side_effect_propagate: I64(1)}
+      : (<null>, <Tensor[Int32], (1, 2)>, <Tensor[Int32], (3200, 2)>, <Tensor[Int32], (1069, 3)>, <Tensor[Int32], (10)>, <Tensor[Int32], (10)>, <null>) -> (<null>)
+      #scope: (Default)
+  %65(CNode_536) = Partial(@336_331_281_✗__main___get_model__locals__TSModel_construct_537, %50, %45, %53, %63) primitive_attrs: {side_effect_propagate: I64(1)}
+      : (<null>, <Tensor[Int32], (102)>, <Tensor[Int32], (102)>, <Tensor[Int32], (10)>, <null>) -> (<null>)
+      #scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:132~133, 6~85/      if cond_func((open_list, top_list, top_dist, max_loops)):/
+  %66(CNode_538) = Switch(%62, %64, %65)
+      : (<null>, <null>, <null>) -> (<null>)
+      #scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:132~133, 6~85/      if cond_func((open_list, top_list, top_dist, max_loops)):/
+  %67(CNode_539) = %66()
+      #scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:132~133, 6~85/      if cond_func((open_list, top_list, top_dist, max_loops)):/
+  %68(CNode_540) = TupleGetItem(%67, I64(0))
+      : (<null>, <null>) -> (<null>)
+      #scope: (Default)
+  %69(CNode_541) = TupleGetItem(%67, I64(1))
+      : (<null>, <null>) -> (<null>)
+      #scope: (Default)
+  %70(CNode_542) = TupleGetItem(%67, I64(2))
+      : (<null>, <null>) -> (<null>)
+      #scope: (Default)
+  %71(CNode_543) = MakeTuple(%68, %69, %70)
+      : (<null>, <null>, <null>) -> (<null>)
+      #scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:135, 13~42/      return top_list, top_dist, open_list/
+  %72(CNode_544) = UpdateState(%63, %67)
+      : (<null>, <null>) -> (<null>)
+      #scope: (Default)
+  %73(CNode_545) = Depend(%71, %72) primitive_attrs: {side_effect_propagate: I64(1)}
+      : (<null>, <null>) -> (<null>)
+      #scope: (Default)
+  Return(%73)
+      : (<null>)
+      #scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:132~133, 6~85/      if cond_func((open_list, top_list, top_dist, max_loops)):/
+}
+
+
+# ===============================================================================================
+# The total of function graphs in evaluation stack: 1
+# ===============================================================================================
+
+
+# ===============================================================================================
+# The rest function graphs are the following:
+# ===============================================================================================
+indirect: 1
+subgraph attr:
+defer_inline: 0
+undeterminate: 0
+less_bn: 0
+subgraph instance: 336_331_281_✗__main___get_model__locals__TSModel_construct_537 : 0x584703a5bdb0
+# In file /home/i/work/JobScheduling/l2/test3.py:99~135, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+subgraph @336_331_281_✗__main___get_model__locals__TSModel_construct_537(%para0_Parameter_546, %para0_Parameter_547, %para0_Parameter_548, %para0_io) {
+  %0(CNode_549) = MakeTuple(%para0_Parameter_546, %para0_Parameter_547, %para0_Parameter_548)
+      : (<null>, <null>, <null>) -> (<null>)
+      #scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:132~133, 6~85/      if cond_func((open_list, top_list, top_dist, max_loops)):/
+  %1(CNode_550) = Depend(%0, %para0_io) primitive_attrs: {side_effect_propagate: I64(1)}
+      : (<null>, <null>) -> (<null>)
+      #scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:132~133, 6~85/      if cond_func((open_list, top_list, top_dist, max_loops)):/
+  Return(%1)
+      : (<null>)
+      #scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:132~133, 6~85/      if cond_func((open_list, top_list, top_dist, max_loops)):/
+}
+
+
+indirect: 1
+subgraph attr:
+defer_inline: 0
+undeterminate: 0
+subgraph instance: 337_332_286_↰cond_func_472 : 0x584703a929e0
+# In file /home/i/work/JobScheduling/l2/test3.py:124~128, 6~53/      @mindspore.jit/
+subgraph @337_332_286_↰cond_func_472() {
+  Return(Bool(1))
+      : (<null>)
+      #scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:128, 15~53/        return max(open_list) != 0 and max_loops >= 0/
+}
+
+
+indirect: 1
+subgraph attr:
+defer_inline: 0
+undeterminate: 0
+subgraph instance: 338_333_288_↱cond_func_473 : 0x584701d64d60
+# In file /home/i/work/JobScheduling/l2/test3.py:124~128, 6~53/      @mindspore.jit/
+subgraph @338_333_288_↱cond_func_473(%para0_Parameter_551) {
+  Return(%para0_Parameter_551)
+      : (<null>)
+      #scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:128, 39~53/        return max(open_list) != 0 and max_loops >= 0/
+}
+
+
+indirect: 1
+subgraph attr:
+defer_inline: 0
+undeterminate: 0
+less_bn: 0
+subgraph instance: 335_330_147_✓__main___get_model__locals__TSModel_construct_535 : 0x584703b061b0
+# In file /home/i/work/JobScheduling/l2/test3.py:99~135, 4~42/    def construct(self, centers, tree, vector_uint8, open_list):/
+subgraph @335_330_147_✓__main___get_model__locals__TSModel_construct_535(%para0_Parameter_552, %para0_centers, %para0_tree, %para0_open_list, %para0_Parameter_553, %para0_io) {
+  %0(CNode_554) = PrimFunc_Gather(%para0_tree, %para0_open_list, I64(0), I64(0))
+      : (<null>, <null>, <Int64, NoShape>, <Int64, NoShape>) -> (<null>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9788, 11~55/    return gather_op(input_params, input_indices, axis)/
+  %1(CNode_555) = PrimFunc_Reshape(%0, (I64(30)))
+      : (<null>, <Tuple[Int64], TupleShape(NoShape), sequence_nodes={node={<freed node>}, node={ValueNode<ValueTuple> (30), elements_use_flags: {ptr: 0x584702de3930, value: [const vector]{1}}}, node={ValueNode<ValueTuple> (30), elements_use_flags: {ptr: 0x584702de3930, value: [const vector]{1}}}, node={ValueNode<ValueTuple> (30), elements_use_flags: {ptr: 0x584702de3930, value: [const vector]{1}}}, node={ValueNode<ValueTuple> (30), elements_use_flags: {ptr: 0x584702de3930, value: [const vector]{1}}}, node={ValueNode<ValueTuple> (30), elements_use_flags: {ptr: 0x584702de3930, value: [const vector]{1}}}, node={ValueNode<ValueTuple> (30), elements_use_flags: {ptr: 0x584702de3930, value: [const vector]{1}}}}>) -> (<null>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:3227, 11~35/    return reshape_op(input, shape)/
+  %2(CNode_556) = PrimFunc_Gather(%para0_centers, %0, I64(0), I64(0))
+      : (<null>, <null>, <Int64, NoShape>, <Int64, NoShape>) -> (<null>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9788, 11~55/    return gather_op(input_params, input_indices, axis)/
+  %3(CNode_557) = PrimFunc_Reshape(%2, (I64(30), I64(2)))
+      : (<null>, <Tuple[Int64*2], TupleShape(NoShape, NoShape), sequence_nodes={node={<freed node>}, node={ValueNode<ValueTuple> (30, 2), elements_use_flags: {ptr: 0x584702dbe190, value: [const vector]{1, 1}}}, node={ValueNode<ValueTuple> (30, 2), elements_use_flags: {ptr: 0x584702dbe190, value: [const vector]{1, 1}}}, node={ValueNode<ValueTuple> (30, 2), elements_use_flags: {ptr: 0x584702dbe190, value: [const vector]{1, 1}}}, node={ValueNode<ValueTuple> (30, 2), elements_use_flags: {ptr: 0x584702dbe190, value: [const vector]{1, 1}}}, node={ValueNode<ValueTuple> (30, 2), elements_use_flags: {ptr: 0x584702dbe190, value: [const vector]{1, 1}}}, node={ValueNode<ValueTuple> (30, 2), elements_use_flags: {ptr: 0x584702dbe190, value: [const vector]{1, 1}}}}>) -> (<null>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:3227, 11~35/    return reshape_op(input, shape)/
+  %4(d) = PrimFunc_Sub(%3, %para0_Parameter_552) primitive_attrs: {output_names: [output], input_names: [x, y]}
+      : (<null>, <null>) -> (<null>)
+      #scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:59, 10~15/      d = a - b/
+  %5(CNode_558$d2$ls) = PrimFunc_Square(%4)
+      : (<null>) -> (<null>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:2728, 11~27/    return square_op(input)/
+  %6(CNode_559) = PrimFunc_SumExt(%5, (I64(1)), Bool(0), None)
+      : (<null>, <Tuple[Int64], TupleShape(NoShape), sequence_nodes={node={<freed node>}, node={ValueNode<ValueTuple> (1), elements_use_flags: {ptr: 0x5847030ea9e0, value: [const vector]{1}}}, node={ValueNode<ValueTuple> (1), elements_use_flags: {ptr: 0x5847030ea9e0, value: [const vector]{1}}}, node={ValueNode<ValueTuple> (1), elements_use_flags: {ptr: 0x5847030ea9e0, value: [const vector]{1}}}, node={ValueNode<ValueTuple> (1), elements_use_flags: {ptr: 0x5847030ea9e0, value: [const vector]{1}}}, node={ValueNode<ValueTuple> (1), elements_use_flags: {ptr: 0x5847030ea9e0, value: [const vector]{1}}}}>, <Bool, NoShape>, <None, NoShape>) -> (<null>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/math_func.py:10804, 11~49/    return sum_ext_op(input, dim, keepdim, dtype)/
+  %7(CNode_560) = PrimFunc_Neg(%6)
+      : (<null>) -> (<null>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9719, 11~24/    return neg_op(input)/
+  %8(res) = TopK(%7, I64(10)) primitive_attrs: {output_names: [values, indices], sorted: Bool(1), input_names: [input, k]}
+      : (<null>, <Int64, NoShape>) -> (<null>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/array_func.py:5495, 18~34/            res = top_k_(input, k)/
+  %9(CNode_561) = TupleGetItem(%8, I64(1))
+      : (<null>, <Int64, NoShape>) -> (<null>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/array_func.py:5496, 39~45/            values, indices = -res[0], res[1]/
+  %10(CNode_562) = PrimFunc_Gather(%1, %9, I64(0), I64(0))
+      : (<null>, <null>, <Int64, NoShape>, <Int64, NoShape>) -> (<null>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9788, 11~55/    return gather_op(input_params, input_indices, axis)/
+  %11(CNode_563) = MakeTuple(Tensor(shape=[102], dtype=Int32, value=[...]), %10)
+      : (<Tensor[Int32], (102), value=...>, <null>) -> (<null>)
+      #scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:89, 36~61/      tot_index = mindspore.ops.cat((top_list, cand_top_list))/
+  %12(CNode_564) = PrimFunc_Concat(%11, I64(0))
+      : (<null>, <Int64, NoShape>) -> (<null>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:4784, 11~37/    return concat_impl(tensors, axis)/
+  %13(CNode_565) = TupleGetItem(%8, I64(0))
+      : (<null>, <Int64, NoShape>) -> (<null>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/array_func.py:5496, 31~37/            values, indices = -res[0], res[1]/
+  %14(CNode_566) = PrimFunc_Neg(%13)
+      : (<null>) -> (<null>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9719, 11~24/    return neg_op(input)/
+  %15(CNode_567) = PrimFunc_Cast(%14, I64(34)) primitive_attrs: {output_names: [output], input_names: [x, dst_type]}
+      : (<null>, <Int64, NoShape>) -> (<null>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9917, 11~32/    return cast_op(input, dtype)/
+  %16(CNode_568) = MakeTuple(Tensor(shape=[102], dtype=Int32, value=[...]), %15)
+      : (<Tensor[Int32], (102), value=...>, <null>) -> (<null>)
+      #scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:88, 36~61/      tot_dist  = mindspore.ops.cat((top_dist, cand_top_dist))/
+  %17(CNode_569) = PrimFunc_Concat(%16, I64(0))
+      : (<null>, <Int64, NoShape>) -> (<null>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:4784, 11~37/    return concat_impl(tensors, axis)/
+  %18(CNode_570) = PrimFunc_Neg(%17)
+      : (<null>) -> (<null>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9719, 11~24/    return neg_op(input)/
+  %19(res) = TopK(%18, I64(102)) primitive_attrs: {output_names: [values, indices], sorted: Bool(1), input_names: [input, k]}
+      : (<null>, <Int64, NoShape>) -> (<null>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/array_func.py:5495, 18~34/            res = top_k_(input, k)/
+  %20(CNode_571) = TupleGetItem(%19, I64(1))
+      : (<null>, <Int64, NoShape>) -> (<null>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/array_func.py:5496, 39~45/            values, indices = -res[0], res[1]/
+  %21(CNode_572) = PrimFunc_Gather(%12, %20, I64(0), I64(0))
+      : (<null>, <null>, <Int64, NoShape>, <Int64, NoShape>) -> (<null>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9788, 11~55/    return gather_op(input_params, input_indices, axis)/
+  %22(CNode_573) = TupleGetItem(%19, I64(0))
+      : (<null>, <Int64, NoShape>) -> (<null>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/function/array_func.py:5496, 31~37/            values, indices = -res[0], res[1]/
+  %23(CNode_574) = PrimFunc_Neg(%22)
+      : (<null>) -> (<null>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:9719, 11~24/    return neg_op(input)/
+  %24(CNode_575$open_list$open_list) = PrimFunc_ClampScalar(%10, I64(0), I64(1068))
+      : (<null>, <Int64, NoShape>, <Int64, NoShape>) -> (<null>)
+      #scope: (Default)
+      # In file /home/i/.local/lib/python3.10/site-packages/mindspore/ops/auto_generate/gen_ops_def.py:4345, 11~43/    return clamp_scalar_op(input, min, max)/
+  %25(CNode_576) = MakeTuple(%21, %23, %24)
+      : (<null>, <null>, <null>) -> (<null>)
+      #scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:133, 8~85/        open_list, top_list, top_dist, max_loops = main_loop_fn(main_loop_init_state)/
+  %26(CNode_577) = MakeTuple(%para0_Parameter_553, Tensor(shape=[102], dtype=Int32, value=[...]), Tensor(shape=[102], dtype=Int32, value=[...]), I64(10))
+      : (<null>, <Tensor[Int32], (102), value=...>, <Tensor[Int32], (102), value=...>, <Int64, NoShape>) -> (<null>)
+      #scope: (Default)
+  %27(CNode_578) = Print(%26, %para0_io) primitive_attrs: {side_effect_io: Bool(1)}
+      : (<null>, <null>) -> (<null>)
+      #scope: (Default)
+  %28(CNode_579) = UpdateState(%para0_io, %27)
+      : (<null>, <null>) -> (<null>)
+      #scope: (Default)
+  %29(CNode_580) = Print("process_open_list", %28) primitive_attrs: {side_effect_io: Bool(1)}
+      : (<String, NoShape>, <null>) -> (<null>)
+      #scope: (Default)
+  %30(CNode_581) = UpdateState(%28, %29)
+      : (<null>, <null>) -> (<null>)
+      #scope: (Default)
+  %31(CNode_582) = Print(%para0_open_list, %30) primitive_attrs: {side_effect_io: Bool(1)}
+      : (<null>, <null>) -> (<null>)
+      #scope: (Default)
+  %32(CNode_583) = UpdateState(%30, %31)
+      : (<null>, <null>) -> (<null>)
+      #scope: (Default)
+  %33(CNode_584) = Print(%para0_tree, %32) primitive_attrs: {side_effect_io: Bool(1)}
+      : (<null>, <null>) -> (<null>)
+      #scope: (Default)
+  %34(CNode_585) = UpdateState(%32, %33)
+      : (<null>, <null>) -> (<null>)
+      #scope: (Default)
+  %35(CNode_586) = Print(%0, %para0_centers, %34) primitive_attrs: {side_effect_io: Bool(1)}
+      : (<null>, <null>, <null>) -> (<null>)
+      #scope: (Default)
+  %36(CNode_587) = UpdateState(%34, %35)
+      : (<null>, <null>) -> (<null>)
+      #scope: (Default)
+  %37(CNode_588) = Print(%3, %36) primitive_attrs: {side_effect_io: Bool(1)}
+      : (<null>, <null>) -> (<null>)
+      #scope: (Default)
+  %38(CNode_589) = UpdateState(%36, %37)
+      : (<null>, <null>) -> (<null>)
+      #scope: (Default)
+  %39(CNode_590$ls) = Print("calc_l2 === === === === === ===", %38) primitive_attrs: {side_effect_io: Bool(1)}
+      : (<String, NoShape>, <null>) -> (<null>)
+      #scope: (Default)
+  %40(CNode_591$ls) = UpdateState(%38, %39)
+      : (<null>, <null>) -> (<null>)
+      #scope: (Default)
+  %41(CNode_592$ls) = Print("a = ", %3, "b = ", %para0_Parameter_552, "d = ", %4, "d2 = ", %5, %40) primitive_attrs: {side_effect_io: Bool(1)}
+      : (<String, NoShape>, <null>, <String, NoShape>, <null>, <String, NoShape>, <null>, <String, NoShape>, <null>, <null>) -> (<null>)
+      #scope: (Default)
+  %42(CNode_593$ls) = UpdateState(%40, %41)
+      : (<null>, <null>) -> (<null>)
+      #scope: (Default)
+  %43(CNode_594$ls) = Print("dist = ", %6, %42) primitive_attrs: {side_effect_io: Bool(1)}
+      : (<String, NoShape>, <null>, <null>) -> (<null>)
+      #scope: (Default)
+  %44(CNode_595$ls) = UpdateState(%42, %43)
+      : (<null>, <null>) -> (<null>)
+      #scope: (Default)
+  %45(CNode_596) = Print(%1, %44) primitive_attrs: {side_effect_io: Bool(1)}
+      : (<null>, <null>) -> (<null>)
+      #scope: (Default)
+  %46(CNode_597) = UpdateState(%44, %45)
+      : (<null>, <null>) -> (<null>)
+      #scope: (Default)
+  %47(CNode_598) = Print(%9, %46) primitive_attrs: {side_effect_io: Bool(1)}
+      : (<null>, <null>) -> (<null>)
+      #scope: (Default)
+  %48(CNode_599) = UpdateState(%46, %47)
+      : (<null>, <null>) -> (<null>)
+      #scope: (Default)
+  %49(CNode_600) = Print("Int32", "Int64", %48) primitive_attrs: {side_effect_io: Bool(1)}
+      : (<String, NoShape>, <String, NoShape>, <null>) -> (<null>)
+      #scope: (Default)
+  %50(CNode_601) = UpdateState(%48, %49)
+      : (<null>, <null>) -> (<null>)
+      #scope: (Default)
+  %51(CNode_602) = Depend(%25, %50) primitive_attrs: {side_effect_propagate: I64(1)}
+      : (<null>, <null>) -> (<null>)
+      #scope: (Default)
+  Return(%51)
+      : (<null>)
+      #scope: (Default)
+      # In file /home/i/work/JobScheduling/l2/test3.py:133, 8~85/        open_list, top_list, top_dist, max_loops = main_loop_fn(main_loop_init_state)/
+}
+
+
